@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "./styles/theme.css";
+@import "./styles/typography.css";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  --font-serif: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Hind Siliguri', 'Hind Shiliguri', monospace;
+  --font-bengali: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+  --font-bengali-serif: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif;
+  --font-bengali-sans: 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+
+  /* Color token utility classes */
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-surface-elevated);
+  --color-surface-subtle: var(--bg-surface-subtle);
+
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-inverse: var(--text-inverse);
+
+  --color-border: var(--border-color);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-fg: var(--color-brand-foreground);
+  --color-brand-subtle: var(--color-brand-subtle);
+  --color-brand-muted: var(--color-brand-muted);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-fg: var(--color-accent-foreground);
+  --color-accent-subtle: var(--color-accent-subtle);
+
+  --color-success: var(--color-success);
+  --color-success-fg: var(--color-success-foreground);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-success-border: var(--color-success-border);
+
+  --color-warning: var(--color-warning);
+  --color-warning-fg: var(--color-warning-foreground);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-warning-border: var(--color-warning-border);
+
+  --color-error: var(--color-error);
+  --color-error-fg: var(--color-error-foreground);
+  --color-error-subtle: var(--color-error-subtle);
+  --color-error-border: var(--color-error-border);
+}
+
+/* Accessibility & Focus Defaults */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

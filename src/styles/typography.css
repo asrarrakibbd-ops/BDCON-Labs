@@ -1,0 +1,474 @@
+/* ==============================================================================
+ * BDCON Labs — Universal Typography Architecture
+ * 
+ * Strict Dual-Font System for Bengali:
+ * 1. Noto Serif Bengali: Headings, literary/editorial titles, book titles, display text
+ * 2. Hind Siliguri: All UI elements, buttons, navigation, forms, inputs, body text,
+ *    descriptions, badges, metadata, captions, tables, and interface controls
+ * 
+ * Absolutely NO default system fonts (Arial, Times, Vrinda, Nirmala UI, Kohinoor, etc.)
+ * are permitted for Bengali text.
+ * ============================================================================== */
+
+/* Fallback local aliases so 'Noto Serif Bangla' or 'Hind Shiliguri' match seamlessly */
+@font-face {
+  font-family: 'Noto Serif Bangla';
+  font-style: normal;
+  font-weight: 400 900;
+  src: local('Noto Serif Bengali'), local('NotoSerifBengali'),
+       url('https://fonts.gstatic.com/s/notoserifbengali/v31/hYkuPvggTvnzO14VSXltirUdnnkt1pwmWrprmO7RjE0a5BtdATYU1crFaM_5JfcAHnqn.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Hind Shiliguri';
+  font-style: normal;
+  font-weight: 300 700;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+/* Unicode-range Interceptions:
+ * Map any Bengali glyph (U+0980-09FF) in Latin or default system fonts directly to Hind Siliguri
+ * This prevents the OS from substituting Vrinda, Nirmala UI, Kohinoor Bangla, or default serif/sans */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nirmala UI';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Vrinda';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SolaimanLipi';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Kalpurush';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Kohinoor Bangla';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bangla MN';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lohit Bengali';
+  unicode-range: U+0980-09FF;
+  font-style: normal;
+  font-weight: 300 800;
+  src: local('Hind Siliguri'), local('HindSiliguri'),
+       url('https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEofJs.ttf') format('truetype');
+}
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  --font-serif: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Hind Siliguri', 'Hind Shiliguri', monospace;
+  --font-bengali-serif: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif;
+  --font-bengali-sans: 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+}
+
+/* Base English / Universal Scale */
+.type-display {
+  font-family: 'Plus Jakarta Sans', 'Noto Serif Bengali', 'Noto Serif Bangla', serif;
+  font-size: clamp(2.5rem, 5.5vw + 1rem, 4.25rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.type-h1 {
+  font-family: 'Plus Jakarta Sans', 'Noto Serif Bengali', 'Noto Serif Bangla', serif;
+  font-size: clamp(2rem, 3.5vw + 0.75rem, 2.75rem);
+  line-height: 1.18;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.type-h2 {
+  font-family: 'Plus Jakarta Sans', 'Noto Serif Bengali', 'Noto Serif Bangla', serif;
+  font-size: clamp(1.5rem, 2.25vw + 0.5rem, 2rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.type-h3 {
+  font-family: 'Plus Jakarta Sans', 'Noto Serif Bengali', 'Noto Serif Bangla', serif;
+  font-size: clamp(1.25rem, 1.5vw + 0.25rem, 1.5rem);
+  line-height: 1.35;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.type-h4 {
+  font-family: 'Plus Jakarta Sans', 'Noto Serif Bengali', 'Noto Serif Bangla', serif;
+  font-size: 1.125rem;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.type-body-large {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.type-body {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.type-body-small {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.type-caption {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-weight: 550;
+  color: var(--text-muted);
+}
+
+.type-button {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.type-navigation {
+  font-family: 'Plus Jakarta Sans', 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.type-mono {
+  font-family: 'JetBrains Mono', 'Hind Siliguri', 'Hind Shiliguri', monospace;
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Explicit Utility Classes */
+.font-bangla-serif,
+.font-bangla-serif * {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+}
+
+.font-bangla-sans,
+.font-bangla-sans * {
+  font-family: 'Hind Siliguri', 'Hind Shiliguri', sans-serif !important;
+}
+
+/* Responsive Headline Typography for Bangla Literary & Editorial Content */
+.type-bangla-display,
+.type-bangla-display * {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.25rem);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.type-bangla-heading,
+.type-bangla-heading * {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  font-size: clamp(1.35rem, 2vw + 0.5rem, 1.85rem);
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: var(--text-primary);
+}
+
+.type-bangla-subheading,
+.type-bangla-subheading * {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  font-size: clamp(1.125rem, 1.2vw + 0.25rem, 1.35rem);
+  line-height: 1.6;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+.type-bangla-excerpt {
+  font-family: 'Hind Siliguri', 'Hind Shiliguri', sans-serif !important;
+  font-size: clamp(0.9375rem, 0.2vw + 0.875rem, 1.0625rem);
+  line-height: 1.85;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+}
+
+/* Long-Form Reading Body for Bangla Articles, Books & Reflections */
+.prose-bangla {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  font-size: clamp(1.0625rem, 0.35vw + 0.95rem, 1.25rem);
+  line-height: 2.05;
+  font-weight: 400;
+  color: var(--text-secondary);
+  max-width: 68ch;
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: 0.01em;
+}
+
+.prose-bangla p {
+  margin-bottom: 1.75rem;
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+}
+
+.prose-bangla p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-bangla blockquote {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  font-style: italic;
+  line-height: 1.95;
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  border-left: 3px solid var(--color-brand);
+  background-color: var(--bg-surface-subtle);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--text-primary);
+}
+
+/* ==============================================================================
+ * STRICT APPLICATION-WIDE TYPOGRAPHY RULES FOR BENGALI
+ * When Bengali is active (html[lang="bn"], html.lang-bn, body.lang-bn, .lang-bn, [lang="bn"], [data-locale="bn"])
+ * Guarantees ONLY Noto Serif Bengali and Hind Siliguri are used.
+ * Absolutely NO default system fonts are permitted.
+ * ============================================================================== */
+
+html[lang="bn"],
+html.lang-bn,
+body.lang-bn,
+.lang-bn,
+[lang="bn"],
+[data-locale="bn"] {
+  --font-sans: 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  --font-bengali-sans: 'Hind Siliguri', 'Hind Shiliguri', sans-serif;
+  --font-bengali-serif: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif;
+  font-family: 'Hind Siliguri', 'Hind Shiliguri', sans-serif !important;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+/* 1. All Headings & Display: Noto Serif Bengali */
+html[lang="bn"] h1, html[lang="bn"] h2, html[lang="bn"] h3, html[lang="bn"] h4, html[lang="bn"] h5, html[lang="bn"] h6,
+html.lang-bn h1, html.lang-bn h2, html.lang-bn h3, html.lang-bn h4, html.lang-bn h5, html.lang-bn h6,
+body.lang-bn h1, body.lang-bn h2, body.lang-bn h3, body.lang-bn h4, body.lang-bn h5, body.lang-bn h6,
+.lang-bn h1, .lang-bn h2, .lang-bn h3, .lang-bn h4, .lang-bn h5, .lang-bn h6,
+[lang="bn"] h1, [lang="bn"] h2, [lang="bn"] h3, [lang="bn"] h4, [lang="bn"] h5, [lang="bn"] h6,
+[data-locale="bn"] h1, [data-locale="bn"] h2, [data-locale="bn"] h3, [data-locale="bn"] h4, [data-locale="bn"] h5, [data-locale="bn"] h6,
+html[lang="bn"] .type-display, html[lang="bn"] .type-h1, html[lang="bn"] .type-h2, html[lang="bn"] .type-h3, html[lang="bn"] .type-h4,
+html.lang-bn .type-display, html.lang-bn .type-h1, html.lang-bn .type-h2, html.lang-bn .type-h3, html.lang-bn .type-h4,
+body.lang-bn .type-display, body.lang-bn .type-h1, body.lang-bn .type-h2, body.lang-bn .type-h3, body.lang-bn .type-h4,
+.lang-bn .type-display, .lang-bn .type-h1, .lang-bn .type-h2, .lang-bn .type-h3, .lang-bn .type-h4,
+[lang="bn"] .type-display, [lang="bn"] .type-h1, [lang="bn"] .type-h2, [lang="bn"] .type-h3, [lang="bn"] .type-h4,
+[data-locale="bn"] .type-display, [data-locale="bn"] .type-h1, [data-locale="bn"] .type-h2, [data-locale="bn"] .type-h3, [data-locale="bn"] .type-h4,
+html[lang="bn"] .type-bangla-display, html[lang="bn"] .type-bangla-heading, html[lang="bn"] .type-bangla-subheading,
+html[lang="bn"] .font-serif, html[lang="bn"] .font-bangla-serif,
+html.lang-bn .type-bangla-display, html.lang-bn .type-bangla-heading, html.lang-bn .type-bangla-subheading,
+html.lang-bn .font-serif, html.lang-bn .font-bangla-serif,
+body.lang-bn .type-bangla-display, body.lang-bn .type-bangla-heading, body.lang-bn .type-bangla-subheading,
+body.lang-bn .font-serif, body.lang-bn .font-bangla-serif,
+.lang-bn .type-bangla-display, .lang-bn .type-bangla-heading, .lang-bn .type-bangla-subheading,
+.lang-bn .font-serif, .lang-bn .font-bangla-serif,
+[lang="bn"] .type-bangla-display, [lang="bn"] .type-bangla-heading, [lang="bn"] .type-bangla-subheading,
+[lang="bn"] .font-serif, [lang="bn"] .font-bangla-serif,
+[data-locale="bn"] .type-bangla-display, [data-locale="bn"] .type-bangla-heading, [data-locale="bn"] .type-bangla-subheading,
+[data-locale="bn"] .font-serif, [data-locale="bn"] .font-bangla-serif {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  letter-spacing: 0 !important;
+  line-height: 1.38;
+}
+
+/* 2. All Body, UI Elements, Forms, Inputs, Buttons, Navigation, Badges, Cards: Hind Siliguri */
+html[lang="bn"] body,
+html[lang="bn"] p,
+html[lang="bn"] span,
+html[lang="bn"] a,
+html[lang="bn"] div,
+html[lang="bn"] li,
+html[lang="bn"] td,
+html[lang="bn"] th,
+html[lang="bn"] tr,
+html[lang="bn"] table,
+html[lang="bn"] button,
+html[lang="bn"] input,
+html[lang="bn"] textarea,
+html[lang="bn"] select,
+html[lang="bn"] option,
+html[lang="bn"] label,
+html[lang="bn"] nav,
+html[lang="bn"] header,
+html[lang="bn"] footer,
+html[lang="bn"] article,
+html[lang="bn"] section,
+html[lang="bn"] aside,
+html[lang="bn"] main,
+html[lang="bn"] strong,
+html[lang="bn"] b,
+html[lang="bn"] em,
+html[lang="bn"] i,
+html[lang="bn"] small,
+html[lang="bn"] time,
+html[lang="bn"] ul,
+html[lang="bn"] ol,
+html[lang="bn"] .type-body,
+html[lang="bn"] .type-body-large,
+html[lang="bn"] .type-body-small,
+html[lang="bn"] .type-caption,
+html[lang="bn"] .type-button,
+html[lang="bn"] .type-navigation,
+html[lang="bn"] .type-bangla-excerpt,
+html[lang="bn"] .font-bangla-sans,
+html[lang="bn"] .font-sans,
+html.lang-bn body, html.lang-bn p, html.lang-bn span, html.lang-bn a, html.lang-bn div, html.lang-bn button,
+html.lang-bn input, html.lang-bn textarea, html.lang-bn label, html.lang-bn li, html.lang-bn td, html.lang-bn th,
+html.lang-bn article, html.lang-bn section, html.lang-bn aside, html.lang-bn main, html.lang-bn strong,
+html.lang-bn b, html.lang-bn em, html.lang-bn i, html.lang-bn small, html.lang-bn time, html.lang-bn ul, html.lang-bn ol,
+html.lang-bn select, html.lang-bn option, html.lang-bn table,
+html.lang-bn .type-body, html.lang-bn .type-body-large, html.lang-bn .type-body-small,
+html.lang-bn .type-caption, html.lang-bn .type-button, html.lang-bn .type-navigation,
+body.lang-bn p, body.lang-bn span, body.lang-bn a, body.lang-bn div, body.lang-bn button,
+body.lang-bn input, body.lang-bn textarea, body.lang-bn label, body.lang-bn li, body.lang-bn td, body.lang-bn th,
+body.lang-bn article, body.lang-bn section, body.lang-bn aside, body.lang-bn main, body.lang-bn strong,
+body.lang-bn b, body.lang-bn em, body.lang-bn i, body.lang-bn small, body.lang-bn time, body.lang-bn ul, body.lang-bn ol,
+body.lang-bn select, body.lang-bn option, body.lang-bn table,
+body.lang-bn .type-body, body.lang-bn .type-body-large, body.lang-bn .type-body-small,
+body.lang-bn .type-caption, body.lang-bn .type-button, body.lang-bn .type-navigation,
+.lang-bn p, .lang-bn span, .lang-bn a, .lang-bn div, .lang-bn button, .lang-bn input, .lang-bn textarea, .lang-bn label,
+.lang-bn li, .lang-bn td, .lang-bn th, .lang-bn article, .lang-bn section, .lang-bn aside, .lang-bn main,
+.lang-bn strong, .lang-bn b, .lang-bn em, .lang-bn i, .lang-bn small, .lang-bn time,
+.lang-bn select, .lang-bn option, .lang-bn table,
+.lang-bn .type-body, .lang-bn .type-body-large, .lang-bn .type-body-small, .lang-bn .type-caption, .lang-bn .type-button, .lang-bn .type-navigation,
+[lang="bn"] p, [lang="bn"] span, [lang="bn"] a, [lang="bn"] div, [lang="bn"] button, [lang="bn"] input, [lang="bn"] textarea, [lang="bn"] label,
+[lang="bn"] li, [lang="bn"] td, [lang="bn"] th, [lang="bn"] article, [lang="bn"] section, [lang="bn"] aside, [lang="bn"] main,
+[lang="bn"] strong, [lang="bn"] b, [lang="bn"] em, [lang="bn"] i, [lang="bn"] small, [lang="bn"] time,
+[lang="bn"] select, [lang="bn"] option, [lang="bn"] table,
+[lang="bn"] .type-body, [lang="bn"] .type-body-large, [lang="bn"] .type-body-small, [lang="bn"] .type-caption, .type-button,
+[data-locale="bn"] p, [data-locale="bn"] span, [data-locale="bn"] a, [data-locale="bn"] div, [data-locale="bn"] button, [data-locale="bn"] input,
+[data-locale="bn"] textarea, [data-locale="bn"] label, [data-locale="bn"] li, [data-locale="bn"] td, [data-locale="bn"] th,
+[data-locale="bn"] strong, [data-locale="bn"] b, [data-locale="bn"] em, [data-locale="bn"] i, [data-locale="bn"] small, [data-locale="bn"] time,
+[data-locale="bn"] select, [data-locale="bn"] option, [data-locale="bn"] table {
+  font-family: 'Hind Siliguri', 'Hind Shiliguri', sans-serif !important;
+  letter-spacing: 0;
+}
+
+/* 3. Monospace in Bengali UI: JetBrains Mono for Latin code/hash, Hind Siliguri for all Bengali characters */
+html[lang="bn"] .font-mono, html[lang="bn"] .type-mono, html[lang="bn"] code, html[lang="bn"] kbd, html[lang="bn"] pre,
+html.lang-bn .font-mono, html.lang-bn .type-mono,
+body.lang-bn .font-mono, body.lang-bn .type-mono,
+.lang-bn .font-mono, .lang-bn .type-mono,
+[lang="bn"] .font-mono, [lang="bn"] .type-mono,
+[data-locale="bn"] .font-mono, [data-locale="bn"] .type-mono {
+  font-family: 'JetBrains Mono', 'Hind Siliguri', 'Hind Shiliguri', monospace !important;
+}
+
+/* 4. Child Heading overrides: Ensures span, a, strong, b, div inside headings ALWAYS stay Noto Serif Bengali */
+html[lang="bn"] h1 *, html[lang="bn"] h2 *, html[lang="bn"] h3 *, html[lang="bn"] h4 *, html[lang="bn"] h5 *, html[lang="bn"] h6 *,
+html.lang-bn h1 *, html.lang-bn h2 *, html.lang-bn h3 *, html.lang-bn h4 *, html.lang-bn h5 *, html.lang-bn h6 *,
+body.lang-bn h1 *, body.lang-bn h2 *, body.lang-bn h3 *, body.lang-bn h4 *, body.lang-bn h5 *, body.lang-bn h6 *,
+.lang-bn h1 *, .lang-bn h2 *, .lang-bn h3 *, .lang-bn h4 *, .lang-bn h5 *, .lang-bn h6 *,
+[lang="bn"] h1 *, [lang="bn"] h2 *, [lang="bn"] h3 *, [lang="bn"] h4 *, [lang="bn"] h5 *, [lang="bn"] h6 *,
+[data-locale="bn"] h1 *, [data-locale="bn"] h2 *, [data-locale="bn"] h3 *, [data-locale="bn"] h4 *, [data-locale="bn"] h5 *, [data-locale="bn"] h6 *,
+html[lang="bn"] .type-display *, html[lang="bn"] .type-h1 *, html[lang="bn"] .type-h2 *, html[lang="bn"] .type-h3 *, html[lang="bn"] .type-h4 *,
+html.lang-bn .type-display *, html.lang-bn .type-h1 *, html.lang-bn .type-h2 *, html.lang-bn .type-h3 *, html.lang-bn .type-h4 *,
+body.lang-bn .type-display *, body.lang-bn .type-h1 *, body.lang-bn .type-h2 *, body.lang-bn .type-h3 *, body.lang-bn .type-h4 *,
+.lang-bn .type-display *, .lang-bn .type-h1 *, .lang-bn .type-h2 *, .lang-bn .type-h3 *, .lang-bn .type-h4 *,
+[lang="bn"] .type-display *, [lang="bn"] .type-h1 *, [lang="bn"] .type-h2 *, [lang="bn"] .type-h3 *, [lang="bn"] .type-h4 *,
+[data-locale="bn"] .type-display *, [data-locale="bn"] .type-h1 *, [data-locale="bn"] .type-h2 *, [data-locale="bn"] .type-h3 *, [data-locale="bn"] .type-h4 *,
+html[lang="bn"] .type-bangla-display *, html[lang="bn"] .type-bangla-heading *,
+html[lang="bn"] .font-bangla-serif *,
+html.lang-bn .type-bangla-display *, html.lang-bn .type-bangla-heading *,
+html.lang-bn .font-bangla-serif *,
+body.lang-bn .type-bangla-display *, body.lang-bn .type-bangla-heading *,
+body.lang-bn .font-bangla-serif *,
+.lang-bn .type-bangla-display *, .lang-bn .type-bangla-heading *,
+.lang-bn .font-bangla-serif *,
+[lang="bn"] .type-bangla-display *, [lang="bn"] .type-bangla-heading *,
+[lang="bn"] .font-bangla-serif *,
+[data-locale="bn"] .type-bangla-display *, [data-locale="bn"] .type-bangla-heading *,
+[data-locale="bn"] .font-bangla-serif * {
+  font-family: 'Noto Serif Bengali', 'Noto Serif Bangla', Georgia, serif !important;
+  letter-spacing: 0 !important;
+}

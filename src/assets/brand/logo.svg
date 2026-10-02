@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <!-- Minimalist vector brand mark for BDCON Labs -->
+  <rect x="0" y="4" width="40" height="40" rx="8" fill="#0252cf"/>
+  <path d="M12 16H20C22.2091 16 24 17.7909 24 20C24 22.2091 22.2091 24 20 24H12V16Z" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M12 24H21C23.2091 24 25 25.7909 25 28C25 30.2091 23.2091 32 21 32H12V24Z" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="52" y="31" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="20" fill="currentColor" letter-spacing="-0.03em">BDCON Labs</text>
+</svg>

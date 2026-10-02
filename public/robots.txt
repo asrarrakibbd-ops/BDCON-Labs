@@ -1,0 +1,15 @@
+# ==============================================================================
+# BDCON Labs — robots.txt
+# Public crawlers are permitted on public pages.
+# Private administrative management endpoints are strictly disallowed.
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /admin/*
+
+# XML Sitemap Index
+Sitemap: https://bdconlabs.com/sitemap.xml

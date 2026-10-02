@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="12" />
+  
+  <!-- Outer glowing ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="10 15" opacity="0.5" />
+  
+  <!-- Calculator Screen -->
+  <rect x="140" y="120" width="232" height="70" rx="10" fill="#022c22" stroke="#10b981" stroke-width="4" />
+  <!-- Screen Text Placeholder represented as glowing digital numbers "২০২৬" which means 2026 -->
+  <!-- Let's render the text in Bengali digits with style -->
+  <text x="256" y="168" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="44" font-weight="bold" fill="#34d399" text-anchor="middle" letter-spacing="2">২ ০ ২ ৬</text>
+  
+  <!-- Calculator Keys Grid -->
+  <g transform="translate(140, 220)">
+    <!-- Key 1 -->
+    <rect x="0" y="0" width="60" height="45" rx="6" fill="url(#goldGrad)" />
+    <text x="30" y="28" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="20" font-weight="bold" fill="#022c22" text-anchor="middle">+</text>
+    
+    <!-- Key 2 -->
+    <rect x="86" y="0" width="60" height="45" rx="6" fill="#115e59" stroke="#0f766e" stroke-width="1" />
+    <text x="116" y="28" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="16" font-weight="bold" fill="#ccfbf1" text-anchor="middle">৳</text>
+    
+    <!-- Key 3 -->
+    <rect x="172" y="0" width="60" height="45" rx="6" fill="#115e59" stroke="#0f766e" stroke-width="1" />
+    <text x="202" y="28" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="20" font-weight="bold" fill="#ccfbf1" text-anchor="middle">%</text>
+    
+    <!-- Row 2 -->
+    <rect x="0" y="65" width="60" height="45" rx="6" fill="#334155" />
+    <text x="30" y="93" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৭</text>
+    
+    <rect x="86" y="65" width="60" height="45" rx="6" fill="#334155" />
+    <text x="116" y="93" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৮</text>
+    
+    <rect x="172" y="65" width="60" height="45" rx="6" fill="#334155" />
+    <text x="202" y="93" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৯</text>
+    
+    <!-- Row 3 -->
+    <rect x="0" y="130" width="60" height="45" rx="6" fill="#334155" />
+    <text x="30" y="158" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৪</text>
+    
+    <rect x="86" y="130" width="60" height="45" rx="6" fill="#334155" />
+    <text x="116" y="158" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৫</text>
+    
+    <rect x="172" y="130" width="60" height="45" rx="6" fill="#334155" />
+    <text x="202" y="158" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৬</text>
+    
+    <!-- Row 4 -->
+    <rect x="0" y="195" width="60" height="45" rx="6" fill="#334155" />
+    <text x="30" y="223" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">১</text>
+    
+    <rect x="86" y="195" width="60" height="45" rx="6" fill="#334155" />
+    <text x="116" y="223" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">২</text>
+    
+    <rect x="172" y="195" width="60" height="45" rx="6" fill="#334155" />
+    <text x="202" y="223" font-family="'Noto Sans Bengali', 'Hind Siliguri', sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">৩</text>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "BDCON Labs",
+  "description": "BDCON Labs builds practical software products, web applications, mobile applications and custom digital solutions for professionals, businesses and organizations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

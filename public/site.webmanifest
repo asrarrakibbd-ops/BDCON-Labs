@@ -1,0 +1,17 @@
+{
+  "name": "BDCON Labs — Software & Digital Products",
+  "short_name": "BDCON Labs",
+  "description": "BDCON Labs builds practical software products, web applications, mobile applications and custom digital solutions for professionals, businesses and organizations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#0252cf",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="bn" class="scroll-smooth lang-bn" data-locale="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BDCON Labs — Software &amp; Digital Products</title>
+    <meta name="description" content="BDCON Labs builds practical software products, web applications, mobile applications and custom digital solutions for professionals, businesses and organizations." />
+    
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0252cf" />
+    
+    <!-- OpenGraph & Social Metadata Defaults -->
+    <meta property="og:site_name" content="BDCON Labs" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BDCON Labs — Software &amp; Digital Products" />
+    <meta property="og:description" content="BDCON Labs builds practical software products, web applications, mobile applications and custom digital solutions for professionals, businesses and organizations." />
+    <meta property="og:image" content="https://bdconlabs.com/images/og-default.svg" />
+    
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BDCON Labs — Software &amp; Digital Products" />
+    <meta name="twitter:description" content="BDCON Labs builds practical software products, web applications, mobile applications and custom digital solutions for professionals, businesses and organizations." />
+    <meta name="twitter:image" content="https://bdconlabs.com/images/og-default.svg" />
+
+    <!-- Google Fonts: Performance Optimized (display=swap, essential weights only) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('bdcon_locale');
+          var lang = saved || 'bn';
+          document.documentElement.lang = lang;
+          document.documentElement.setAttribute('data-locale', lang);
+          if (lang === 'bn') {
+            document.documentElement.classList.add('lang-bn');
+          } else {
+            document.documentElement.classList.add('lang-en');
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased selection:bg-[var(--color-brand-muted)] selection:text-[var(--color-brand)]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
