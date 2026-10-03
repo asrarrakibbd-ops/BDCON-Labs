@@ -29,6 +29,7 @@ export interface TranslationDictionary {
     rakibAsrar: string;
     contact: string;
     startProject: string;
+    engineering: string;
   };
   footer: {
     solutions: string;
@@ -126,6 +127,40 @@ export interface TranslationDictionary {
     title: string;
     description: string;
     cta: string;
+  };
+  engineeringLanding: {
+    hero: {
+      eyebrow: string;
+      headline: string;
+      description: string;
+      discussProject: string;
+      exploreServices: string;
+      blueprintTag: string;
+      planType: string;
+    };
+    services: {
+      heading: string;
+      subheading: string;
+      items: {
+        title: string;
+        description: string;
+        scope: string[];
+      }[];
+    };
+    brandIntro: {
+      heading: string;
+      paragraphs: string[];
+      labsRelationTitle: string;
+      labsRelationText: string;
+      engineeringPositionTitle: string;
+      engineeringPositionText: string;
+    };
+    cta: {
+      heading: string;
+      description: string;
+      button: string;
+      secondaryButton: string;
+    };
   };
 }
 

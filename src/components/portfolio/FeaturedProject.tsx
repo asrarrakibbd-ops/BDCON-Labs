@@ -59,7 +59,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
               {project.title}
             </h3>
             {project.projectType && (
-              <p className="type-body text-[var(--color-brand)] font-medium">
+              <p className="type-body text-[var(--color-brand)] dark:text-blue-400 font-medium">
                 {project.projectType}
               </p>
             )}

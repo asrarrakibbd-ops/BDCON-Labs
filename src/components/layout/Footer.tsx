@@ -72,6 +72,14 @@ export const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
+                    to="/engineering"
+                    className="hover:text-[var(--text-primary)] transition-colors inline-block py-1 min-h-[32px] sm:min-h-0"
+                  >
+                    {t('nav.engineering')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     to="/portfolio"
                     className="hover:text-[var(--text-primary)] transition-colors inline-block py-1 min-h-[32px] sm:min-h-0"
                   >

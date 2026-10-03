@@ -58,10 +58,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Primary Page H1 Headline */}
             <h1 
+              style={{
+                textAlign: 'left',
+                fontStyle: 'normal',
+                color: 'var(--text-primary)',
+              }}
               className={cn(
-                'text-[var(--text-primary)] font-bold text-balance animate-fade-in-up motion-reduce:animate-none',
+                'font-bold text-balance animate-fade-in-up motion-reduce:animate-none text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[50px] leading-tight md:leading-[1.15] lg:leading-[1.12]',
                 isBangla 
-                  ? 'font-bangla-serif tracking-normal leading-[1.25] text-3xl sm:text-4xl lg:text-[44px]' 
+                  ? 'font-bangla-serif tracking-normal' 
                   : 'type-display tracking-tight',
                 headlineClassName
               )}

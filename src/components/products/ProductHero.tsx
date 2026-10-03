@@ -56,7 +56,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({ product, className }) 
               </div>
 
               {product.tagline && (
-                <p className="type-body-large text-[var(--color-brand)] font-medium">
+                <p className="type-body-large text-[var(--color-brand)] dark:text-blue-400 font-medium">
                   {product.tagline}
                 </p>
               )}

@@ -12,6 +12,7 @@ export interface NavLinksProps {
 export const MAIN_NAV_ITEMS = [
   { key: 'products', path: '/products' },
   { key: 'services', path: '/services' },
+  { key: 'engineering', path: '/engineering' },
   { key: 'portfolio', path: '/portfolio' },
   { key: 'about', path: '/about' },
   { key: 'blog', path: '/blog' },

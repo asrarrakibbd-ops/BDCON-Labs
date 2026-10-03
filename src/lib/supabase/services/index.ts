@@ -11,4 +11,5 @@ export * from './writing';
 export * from './author';
 export * from './projectRequests';
 export * from './contactMessages';
+export * from './engineeringInquiries';
 export * from './settings';

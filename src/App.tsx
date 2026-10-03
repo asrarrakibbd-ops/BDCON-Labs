@@ -15,6 +15,12 @@ import { ProductsPage } from './pages/ProductsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
+import { EngineeringPage } from './pages/EngineeringPage';
+import { EngineeringServicesPage } from './pages/EngineeringServicesPage';
+import { EngineeringServiceDetailPage } from './pages/EngineeringServiceDetailPage';
+import { EngineeringProjectsPage } from './pages/EngineeringProjectsPage';
+import { EngineeringProjectDetailPage } from './pages/EngineeringProjectDetailPage';
+import { EngineeringContactPage } from './pages/EngineeringContactPage';
 import { StartProjectPage } from './pages/StartProjectPage';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
@@ -80,6 +86,33 @@ const AppRoutes: React.FC = () => {
   const serviceDetailMatch = matchPath('/services/:slug', path);
   if (serviceDetailMatch.matches) {
     return <ServiceDetailPage />;
+  }
+
+  // BDCON Engineering Ltd Routes
+  if (path === '/engineering') {
+    return <EngineeringPage />;
+  }
+
+  if (path === '/engineering/services') {
+    return <EngineeringServicesPage />;
+  }
+
+  const engineeringServiceDetailMatch = matchPath('/engineering/services/:slug', path);
+  if (engineeringServiceDetailMatch.matches) {
+    return <EngineeringServiceDetailPage />;
+  }
+
+  if (path === '/engineering/projects') {
+    return <EngineeringProjectsPage />;
+  }
+
+  const engineeringProjectDetailMatch = matchPath('/engineering/projects/:slug', path);
+  if (engineeringProjectDetailMatch.matches) {
+    return <EngineeringProjectDetailPage />;
+  }
+
+  if (path === '/engineering/contact') {
+    return <EngineeringContactPage />;
   }
 
   // Portfolio Catalogue Route (Stage 8)

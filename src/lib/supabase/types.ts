@@ -448,6 +448,41 @@ export interface Database {
         };
         Update: Partial<Database['public']['Tables']['contact_messages']['Insert']>;
       };
+      engineering_inquiries: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone: string;
+          project_location: string;
+          project_type: string;
+          building_area: string | null;
+          required_service: string;
+          description: string;
+          preferred_contact: 'email' | 'phone' | 'whatsapp' | string;
+          status: 'new' | 'reviewed' | 'contacted' | 'archived';
+          admin_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          phone: string;
+          project_location: string;
+          project_type: string;
+          building_area?: string | null;
+          required_service: string;
+          description: string;
+          preferred_contact?: 'email' | 'phone' | 'whatsapp' | string;
+          status?: 'new' | 'reviewed' | 'contacted' | 'archived';
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Database['public']['Tables']['engineering_inquiries']['Insert']>;
+      };
       site_settings: {
         Row: {
           id: string;

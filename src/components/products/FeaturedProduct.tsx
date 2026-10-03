@@ -65,7 +65,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
             </div>
 
             {product.tagline && (
-              <p className="type-body text-[var(--color-brand)] font-medium">
+              <p className="type-body text-[var(--color-brand)] dark:text-blue-400 font-medium">
                 {product.tagline}
               </p>
             )}

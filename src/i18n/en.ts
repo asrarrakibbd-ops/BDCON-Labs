@@ -29,6 +29,7 @@ export const en: TranslationDictionary = {
     rakibAsrar: 'Rakib Asrar',
     contact: 'Contact',
     startProject: 'Start a Project',
+    engineering: 'Engineering',
   },
   footer: {
     solutions: 'Solutions',
@@ -126,5 +127,69 @@ export const en: TranslationDictionary = {
     title: 'Rakib Asrar · Author & Writer',
     description: 'Alongside BDCON Labs stands the literary work and creative publications of writer Rakib Asrar. Published works: Porojibi (Story Collection) & Tiler Chaya (Novel).',
     cta: 'Explore Rakib Asrar',
+  },
+  engineeringLanding: {
+    hero: {
+      eyebrow: 'BDCON ENGINEERING LTD',
+      headline: 'Civil Engineering Consultancy',
+      description: 'Building design, engineering drawings, estimation and construction consultancy for practical, buildable solutions.',
+      discussProject: 'Discuss Your Project',
+      exploreServices: 'Explore Our Services',
+      blueprintTag: 'STRUCTURAL & ARCHITECTURAL CONSULTING',
+      planType: 'GENERAL ARRANGEMENT & COLUMN SCHEDULE',
+    },
+    services: {
+      heading: 'Engineering Services',
+      subheading: 'Core civil engineering and construction consulting disciplines engineered for precision, economy, and buildability.',
+      items: [
+        {
+          title: 'Building Design',
+          description: 'Comprehensive architectural and structural planning tailored for residential, commercial, and institutional projects.',
+          scope: ['Architectural design', 'Structural layout', 'Code compliance & safety'],
+        },
+        {
+          title: 'Design & Engineering Drawings',
+          description: 'Detailed structural working drawings, architectural schematics, and construction-ready layout documentation.',
+          scope: ['Working drawings', 'Structural detailing', 'Foundation & framing plans'],
+        },
+        {
+          title: 'Building Estimation',
+          description: 'Accurate material takeoffs, structural quantity assessments, and reliable cost projections before execution.',
+          scope: ['Material takeoff', 'Structural volume analysis', 'Pre-construction costing'],
+        },
+        {
+          title: 'Quantity Surveying & BOQ',
+          description: 'Standardized Bill of Quantities, itemized tender documentation, and rigorous rate analysis.',
+          scope: ['Bill of Quantities (BOQ)', 'Itemized rate analysis', 'Tender schedules'],
+        },
+        {
+          title: 'Construction Consultancy',
+          description: 'Professional guidance, site implementation advisory, and technical supervision for sound project delivery.',
+          scope: ['Site execution advisory', 'Quality verification', 'Practical problem resolution'],
+        },
+        {
+          title: 'Civil Engineering Consultancy',
+          description: 'Specialized civil and structural engineering advisory services addressing complex real-world challenges.',
+          scope: ['Structural assessment', 'Retrofitting advisory', 'Technical feasibility'],
+        },
+      ],
+    },
+    brandIntro: {
+      heading: 'Engineering expertise for real-world projects.',
+      paragraphs: [
+        'BDCON Engineering Ltd provides practical civil engineering, design, estimation, and construction-related consultancy. We focus on dependable, code-compliant, and buildable solutions for property owners, developers, and institutions.',
+        'Every project is approached with mathematical rigor, safety consciousness, and practical field insight—ensuring that architectural visions translate smoothly into durable physical realities without unforeseen cost escalations.'
+      ],
+      labsRelationTitle: 'BDCON Ecosystem',
+      labsRelationText: 'While BDCON Labs engineers software products, digital tools, and technical platforms, BDCON Engineering Ltd focuses exclusively on civil engineering consultancy and physical construction solutions.',
+      engineeringPositionTitle: 'Core Focus',
+      engineeringPositionText: 'Practical civil engineering consultancy, structural drawings, and transparent estimation built for the realities of the construction sector.',
+    },
+    cta: {
+      heading: 'Have an engineering project in mind?',
+      description: 'Discuss your building design, drawing requirements, or estimation needs with our engineering team for practical, buildable advice.',
+      button: 'Discuss Your Project',
+      secondaryButton: 'Explore Our Services',
+    },
   },
 };

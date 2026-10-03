@@ -17,6 +17,7 @@ import { ProductsSection } from '../components/home/ProductsSection';
 import { ServicesSection } from '../components/home/ServicesSection';
 import { SelectedWorkSection } from '../components/home/SelectedWorkSection';
 import { HomepageAboutSection } from '../components/home/HomepageAboutSection';
+import { HomepageEngineeringSection } from '../components/home/HomepageEngineeringSection';
 import { HomepageRakibAsrarSection } from '../components/home/HomepageRakibAsrarSection';
 import { HomepageContactCTA } from '../components/home/HomepageContactCTA';
 import { Container } from '../components/layout/Container';
@@ -68,13 +69,16 @@ export const HomePage: React.FC = () => {
       {/* 6. Selected Work / Portfolio Section */}
       <SelectedWorkSection />
 
-      {/* 7. Homepage About / Philosophy Section */}
+      {/* 7. Connected Entity: BDCON Engineering Ltd (Civil Engineering Consultancy) */}
+      <HomepageEngineeringSection />
+
+      {/* 8. Homepage About / Philosophy Section */}
       <HomepageAboutSection />
 
-      {/* 8. Connected Creative Identity: Rakib Asrar */}
+      {/* 9. Connected Creative Identity: Rakib Asrar */}
       <HomepageRakibAsrarSection />
 
-      {/* 9. Conversion Contact CTA */}
+      {/* 10. Conversion Contact CTA */}
       <HomepageContactCTA />
 
       {/* 10. Collapsible Foundation & Architecture Inspector (Preserving Stage 1 & 2 Test Suite) */}
