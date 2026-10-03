@@ -43,12 +43,15 @@ export const HomePage: React.FC = () => {
         canonicalPath="/"
         jsonLd={buildOrganizationSchema()}
       />
-      {/* 1. Primary Homepage Hero Section */}
-      <HeroSection 
-        headlineClassName="animate-fade-in-up"
-        bodyClassName="animate-fade-in-up-delay-1"
-        ctaClassName="animate-fade-in-up-delay-2"
-      />
+      {/* 1. Primary Homepage Hero Section wrapped in overflow-hidden container to prevent mobile horizontal scroll */}
+      <div className="w-full overflow-hidden">
+        <HeroSection 
+          headlineClassName="animate-fade-in-up"
+          bodyClassName="animate-fade-in-up-delay-1"
+          ctaClassName="animate-fade-in-up-delay-2"
+          visualClassName="overflow-hidden"
+        />
+      </div>
 
       {/* 2. Company Introduction Section */}
       <CompanyIntroSection />

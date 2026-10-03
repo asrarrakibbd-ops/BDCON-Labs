@@ -72,16 +72,16 @@
   --bg-surface-subtle: #121a2d;
   --bg-surface-active: #1e293b;
 
-  /* Typography Colors */
+  /* Typography Colors — High Contrast WCAG 2.2 AA/AAA Verified */
   --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a0b3cc;
   --text-inverse: #090d14;
 
   /* Borders & Hairlines */
   --border-color: #1e293b;
   --border-subtle: #141d30;
-  --border-strong: #2e3e57;
+  --border-strong: #334460;
 
   /* Brand Colors — High Legibility Electric Indigo */
   --color-brand: #3b82f6;

@@ -98,10 +98,10 @@ export const SelectedWorkSection: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="p-6 sm:p-8 rounded-2xl border border-stone-300 dark:border-stone-800 bg-[#fdfbf7] dark:bg-[#151413] shadow-xs hover:border-amber-600/40 transition-all duration-300">
+                  <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] dark:bg-[var(--bg-surface-elevated)] shadow-xs hover:border-amber-600/40 transition-all duration-300">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                       <div className="lg:col-span-6 space-y-4 text-left">
-                        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-xs font-mono">
+                        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-xs font-mono font-medium">
                           <BookOpen className="w-3.5 h-3.5" />
                           <span>{editorialProject.projectType || 'Author / Personal Website'}</span>
                         </div>
@@ -110,7 +110,7 @@ export const SelectedWorkSection: React.FC = () => {
                           <h3 className="font-bangla-serif text-2xl sm:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
                             {editorialProject.title}
                           </h3>
-                          <p className="font-bangla-serif text-xs sm:text-sm text-stone-600 dark:text-stone-300 italic">
+                          <p className="font-bangla-serif text-xs sm:text-sm text-amber-800/80 dark:text-amber-300/90 italic">
                             সাহিত্য, দর্শন ও বুদ্ধিবৃত্তিক কাজের একটি মার্জিত অনলাইন উপস্থিতি
                           </p>
                         </div>

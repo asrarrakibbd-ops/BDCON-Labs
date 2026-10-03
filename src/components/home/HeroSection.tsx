@@ -121,7 +121,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Right Column: Technical Product Visual Composition */}
-          <div className={cn('lg:col-span-5 w-full animate-fade-in-up animate-fade-in-up-delay-1 motion-reduce:animate-none', visualClassName)}>
+          <div className={cn('lg:col-span-5 w-full animate-fade-in-up animate-fade-in-up-delay-1 motion-reduce:animate-none overflow-hidden', visualClassName)}>
             <HeroVisual />
           </div>
         </div>

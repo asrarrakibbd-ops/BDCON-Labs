@@ -176,24 +176,24 @@ export const HeroVisual: React.FC<HeroVisualProps> = ({ className }) => {
             </div>
 
             {/* Right Column: Structured Output Card */}
-            <div className="sm:col-span-5 rounded-lg border border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 p-3 sm:p-3.5 space-y-2">
-              <div className="flex items-center justify-between text-[10px] font-bangla-sans text-emerald-800 dark:text-emerald-300 font-medium">
+            <div className="sm:col-span-5 rounded-lg border border-emerald-500/40 bg-emerald-50/90 dark:bg-emerald-950/60 p-3 sm:p-3.5 space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-bangla-sans text-emerald-800 dark:text-emerald-300 font-semibold">
                 <span>নীট প্রদেয় বেতন</span>
-                <span className="text-[9px] font-mono uppercase tracking-wider bg-emerald-500/10 px-1 rounded">
+                <span className="text-[9px] font-mono uppercase tracking-wider bg-emerald-500/20 dark:bg-emerald-500/25 px-1.5 py-0.5 rounded text-emerald-800 dark:text-emerald-200 font-bold">
                   NET
                 </span>
               </div>
-              <div className="font-mono text-lg sm:text-xl font-bold text-emerald-600 dark:text-emerald-400 tracking-tight">
+              <div className="font-mono text-lg sm:text-xl font-bold text-emerald-700 dark:text-emerald-300 tracking-tight">
                 ৳ ৩১,২০০
               </div>
-              <div className="pt-1 border-t border-emerald-500/20 text-[9px] sm:text-[10px] text-[var(--text-muted)] space-y-0.5 font-mono">
-                <div className="flex justify-between">
-                  <span>মোট বেতন:</span>
-                  <span className="text-[var(--text-secondary)]">৳ ৩৩,৪০০</span>
+              <div className="pt-1.5 border-t border-emerald-500/25 text-[9px] sm:text-[10px] space-y-1 font-mono">
+                <div className="flex justify-between items-center">
+                  <span className="text-emerald-900/80 dark:text-emerald-200/80">মোট বেতন:</span>
+                  <span className="text-emerald-950 dark:text-emerald-100 font-semibold">৳ ৩৩,৪০০</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>জিপিএফ কর্তন:</span>
-                  <span className="text-rose-500/90">- ৳ ২,২০০</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-emerald-900/80 dark:text-emerald-200/80">জিপিএফ কর্তন:</span>
+                  <span className="text-rose-600 dark:text-rose-400 font-semibold">- ৳ ২,২০০</span>
                 </div>
               </div>
             </div>

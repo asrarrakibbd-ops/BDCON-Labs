@@ -507,7 +507,7 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
   return (
     <div
       className={cn(
-        'relative w-full rounded-2xl border border-stone-300 dark:border-stone-800 bg-[#fdfbf7] dark:bg-[#151413] overflow-hidden flex flex-col justify-between shadow-xs select-none group-hover:border-amber-600/40 transition-all duration-300',
+        'relative w-full rounded-2xl border border-[var(--border-color)] bg-[var(--bg-surface)] dark:bg-[var(--bg-surface-elevated)] overflow-hidden flex flex-col justify-between shadow-xs select-none group-hover:border-amber-600/40 transition-all duration-300',
         size === 'lg' ? 'aspect-[16/10]' : size === 'sm' ? 'aspect-[16/11]' : 'aspect-[16/10]',
         className
       )}
@@ -518,15 +518,15 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-amber-500/5 via-transparent to-transparent opacity-60" />
 
       {/* Top Editorial Browser Titlebar */}
-      <div className="relative z-10 flex items-center justify-between px-3.5 sm:px-4 py-2 bg-[#f4efe8] dark:bg-[#1c1a18] border-b border-stone-200 dark:border-stone-800 text-xs">
+      <div className="relative z-10 flex items-center justify-between px-3.5 sm:px-4 py-2 bg-[var(--bg-surface-subtle)] border-b border-[var(--border-color)] text-xs">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5" aria-hidden="true">
-            <span className="w-2.5 h-2.5 rounded-full bg-stone-400/60 dark:bg-stone-600" />
-            <span className="w-2.5 h-2.5 rounded-full bg-stone-400/40 dark:bg-stone-700" />
-            <span className="w-2.5 h-2.5 rounded-full bg-stone-400/20 dark:bg-stone-800" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-strong)] opacity-60" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-strong)] opacity-40" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-strong)] opacity-20" />
           </div>
-          <div className="flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full bg-[#fdfbf7] dark:bg-[#151413] border border-stone-200 dark:border-stone-800 font-mono text-[10px] text-stone-600 dark:text-stone-400">
-            <BookOpen className="w-2.5 h-2.5 text-amber-700 dark:text-amber-500" />
+          <div className="flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] font-mono text-[10px] text-[var(--text-muted)]">
+            <BookOpen className="w-2.5 h-2.5 text-amber-600 dark:text-amber-400" />
             <span>asrarbd.vercel.app</span>
           </div>
         </div>
@@ -540,17 +540,17 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
       <div className="relative z-10 flex-1 p-3.5 sm:p-5 flex items-center justify-between gap-4">
         {/* Left Literary Description */}
         <div className="space-y-1.5 sm:space-y-2 flex-1 text-left">
-          <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-800 dark:text-amber-400">
+          <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-amber-700 dark:text-amber-300 font-semibold">
             <FileText className="w-3 h-3" />
             <span>সাহিত্য ও গবেষণা</span>
           </div>
-          <h4 className="font-bangla-serif text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight">
+          <h4 className="font-bangla-serif text-base sm:text-lg font-bold text-[var(--text-primary)] tracking-tight leading-tight">
             রাকিব আসরার
           </h4>
-          <p className="font-bangla-serif text-[11px] sm:text-xs text-stone-600 dark:text-stone-300 italic line-clamp-2 leading-relaxed">
+          <p className="font-bangla-serif text-[11px] sm:text-xs text-[var(--text-secondary)] italic line-clamp-2 leading-relaxed">
             &ldquo;সাহিত্য, দর্শন ও বুদ্ধিবৃত্তিক চিন্তার নিভৃত পরিসর&rdquo;
           </p>
-          <div className="pt-1 flex flex-wrap gap-1 text-[9px] sm:text-[10px] font-mono text-stone-500 dark:text-stone-400">
+          <div className="pt-1 flex flex-wrap gap-1 text-[9px] sm:text-[10px] font-mono text-[var(--text-muted)]">
             <span>• গ্রন্থসমগ্র</span>
             <span>• প্রবন্ধ আর্কাইভ</span>
           </div>
@@ -559,7 +559,7 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
         {/* Right: Actual Real Book Covers from Project */}
         <div className="flex items-center -space-x-4 sm:-space-x-6 shrink-0 pr-2">
           {/* Book 1: তিলের ছায়া */}
-          <div className="w-16 sm:w-20 aspect-[2/3] rounded-md overflow-hidden shadow-md border border-stone-300 dark:border-stone-700 transform -rotate-3 transition-transform group-hover:-rotate-6 bg-stone-200">
+          <div className="w-16 sm:w-20 aspect-[2/3] rounded-md overflow-hidden shadow-md border border-[var(--border-color)] transform -rotate-3 transition-transform group-hover:-rotate-6 bg-[var(--bg-surface-subtle)]">
             <img
               src="/images/rakib-asrar/books/tiler-chaya.jpg"
               alt="তিলের ছায়া বইয়ের প্রচ্ছদ"
@@ -568,7 +568,7 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
             />
           </div>
           {/* Book 2: পরজীবী */}
-          <div className="w-16 sm:w-20 aspect-[2/3] rounded-md overflow-hidden shadow-lg border border-stone-300 dark:border-stone-700 transform rotate-3 transition-transform group-hover:rotate-6 bg-stone-200">
+          <div className="w-16 sm:w-20 aspect-[2/3] rounded-md overflow-hidden shadow-lg border border-[var(--border-color)] transform rotate-3 transition-transform group-hover:rotate-6 bg-[var(--bg-surface-subtle)]">
             <img
               src="/images/rakib-asrar/books/porojibi.jpg"
               alt="পরজীবী বইয়ের প্রচ্ছদ"
@@ -580,12 +580,12 @@ export const ProjectShowcaseVisual: React.FC<ProjectShowcaseVisualProps> = ({
       </div>
 
       {/* Frame Status Sub-Bar */}
-      <div className="relative z-10 px-3.5 sm:px-4 py-2 bg-[#f4efe8] dark:bg-[#1c1a18] border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-[10px] sm:text-[11px] text-stone-600 dark:text-stone-400 font-mono">
+      <div className="relative z-10 px-3.5 sm:px-4 py-2 bg-[var(--bg-surface-subtle)] border-t border-[var(--border-color)] flex items-center justify-between text-[10px] sm:text-[11px] text-[var(--text-muted)] font-mono">
         <div className="flex items-center gap-1.5">
-          <BookOpen className="w-3.5 h-3.5 text-amber-700 dark:text-amber-500" />
-          <span className="font-bangla-serif text-[11px]">প্রকাশিত বই ও সাহিত্য রচনা</span>
+          <BookOpen className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+          <span className="font-bangla-serif text-[11px] text-[var(--text-secondary)]">প্রকাশিত বই ও সাহিত্য রচনা</span>
         </div>
-        <span className="text-[9px] sm:text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">
+        <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[var(--text-muted)]">
           EDITORIAL WEBSITE
         </span>
       </div>
