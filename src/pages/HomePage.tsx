@@ -44,7 +44,11 @@ export const HomePage: React.FC = () => {
         jsonLd={buildOrganizationSchema()}
       />
       {/* 1. Primary Homepage Hero Section */}
-      <HeroSection />
+      <HeroSection 
+        headlineClassName="animate-fade-in-up"
+        bodyClassName="animate-fade-in-up-delay-1"
+        ctaClassName="animate-fade-in-up-delay-2"
+      />
 
       {/* 2. Company Introduction Section */}
       <CompanyIntroSection />

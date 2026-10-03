@@ -6,12 +6,29 @@ import { Button } from '../ui/Button';
 import { HeroVisual } from './HeroVisual';
 import { Link } from '../../lib/router';
 import { useTranslation } from '../../hooks/useTranslation';
+import { cn } from '../../lib/utils';
 
-export const HeroSection: React.FC = () => {
+export interface HeroSectionProps {
+  className?: string;
+  headlineClassName?: string;
+  bodyClassName?: string;
+  descriptionClassName?: string;
+  ctaClassName?: string;
+  visualClassName?: string;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  className,
+  headlineClassName,
+  bodyClassName,
+  descriptionClassName,
+  ctaClassName,
+  visualClassName,
+}) => {
   const { t, isBangla } = useTranslation();
 
   return (
-    <Section spacing="xl" surface="canvas" borderBottom className="relative overflow-hidden">
+    <Section spacing="xl" surface="canvas" borderBottom className={cn('relative overflow-hidden', className)}>
       {/* Background Technical Grid & Soft Ambient Light Glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-30"
@@ -32,8 +49,8 @@ export const HeroSection: React.FC = () => {
           {/* Left Column: Core Positioning & Actions */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Technical Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand)] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-2xs animate-fade-in-up motion-reduce:animate-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand)] animate-pulse motion-reduce:animate-none" />
               <span className={`type-caption font-semibold tracking-wider uppercase text-[var(--color-brand)] text-[11px] ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
                 {t('hero.eyebrow')}
               </span>
@@ -41,28 +58,37 @@ export const HeroSection: React.FC = () => {
 
             {/* Primary Page H1 Headline */}
             <h1 
-              className={`text-[var(--text-primary)] font-bold text-balance ${
+              className={cn(
+                'text-[var(--text-primary)] font-bold text-balance animate-fade-in-up motion-reduce:animate-none',
                 isBangla 
                   ? 'font-bangla-serif tracking-normal leading-[1.25] text-3xl sm:text-4xl lg:text-[44px]' 
-                  : 'type-display tracking-tight'
-              }`}
+                  : 'type-display tracking-tight',
+                headlineClassName
+              )}
             >
               {t('hero.headline')}
             </h1>
 
             {/* Supporting Copy */}
             <p 
-              className={`max-w-2xl text-balance leading-relaxed text-[var(--text-secondary)] ${
+              className={cn(
+                'max-w-2xl text-balance leading-relaxed text-[var(--text-secondary)] animate-fade-in-up animate-fade-in-up-delay-1 motion-reduce:animate-none',
                 isBangla 
                   ? 'font-bangla-sans text-base sm:text-lg leading-[1.7]' 
-                  : 'type-body-large'
-              }`}
+                  : 'type-body-large',
+                bodyClassName || descriptionClassName
+              )}
             >
               {t('hero.description')}
             </p>
 
             {/* CTA Group */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+            <div 
+              className={cn(
+                'pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 animate-fade-in-up animate-fade-in-up-delay-2 motion-reduce:animate-none',
+                ctaClassName
+              )}
+            >
               <Link to="/products" className="inline-block">
                 <Button
                   as="span"
@@ -88,14 +114,14 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Micro-copy line */}
-            <div className={`pt-2 flex items-center gap-2 text-xs text-[var(--text-muted)] ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
-              <span className="w-1 h-1 rounded-full bg-[var(--color-brand)]" />
+            <div className={`pt-2 flex items-center gap-2 text-xs text-[var(--text-muted)] animate-fade-in-up animate-fade-in-up-delay-2 motion-reduce:animate-none ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
+              <span className="w-1 h-1 rounded-full bg-[var(--color-brand)] motion-reduce:animate-none" />
               <span>{t('hero.microCopy')}</span>
             </div>
           </div>
 
           {/* Right Column: Technical Product Visual Composition */}
-          <div className="lg:col-span-5 w-full">
+          <div className={cn('lg:col-span-5 w-full animate-fade-in-up animate-fade-in-up-delay-1 motion-reduce:animate-none', visualClassName)}>
             <HeroVisual />
           </div>
         </div>
