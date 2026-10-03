@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Globe, Smartphone } from 'lucide-react';
+import { ArrowRight, ExternalLink, Globe, Smartphone } from 'lucide-react';
 import { PortfolioProject } from '../../types/portfolio';
 import { ProjectVisual } from './ProjectVisual';
 import { Link } from '../../lib/router';
@@ -27,7 +27,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       aria-labelledby={`portfolio-card-title-${project.id}`}
     >
       <div className="space-y-4">
-        {/* Visual Frame */}
+        {/* Project-Specific Distinctive Visual Frame */}
         <div className="w-full overflow-hidden rounded-xl">
           <ProjectVisual project={project} size="sm" />
         </div>
@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Category & Status Row */}
         <div className="flex items-center justify-between gap-2 pt-1">
           <span className="type-caption font-mono uppercase tracking-wider text-[var(--color-brand)] text-[10px] font-bold">
-            {project.category.replace('-', ' ')}
+            {project.projectType || project.category.replace('-', ' ')}
           </span>
 
           {project.status && (
@@ -88,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Card Action Footer */}
-      <div className="mt-5 pt-4 border-t border-[var(--border-color)] flex items-center justify-between gap-3">
+      <div className="mt-5 pt-4 border-t border-[var(--border-color)] flex items-center justify-between gap-2.5">
         {project.platforms && (
           <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] font-mono">
             {project.platforms.includes('web') && (
@@ -104,14 +104,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         )}
 
-        <Link
-          to={detailPath}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--color-brand)] hover:text-[var(--color-brand-hover)] transition-colors group-hover:translate-x-1 duration-150 ml-auto"
-          aria-label={isBangla ? `${project.title}-এর কেস স্টাডি দেখুন` : `View case study for ${project.title}`}
-        >
-          <span>{isBangla ? 'কেস স্টাডি দেখুন' : 'View Case Study'}</span>
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-        </Link>
+        <div className="flex items-center gap-2 ml-auto">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[11px] font-mono font-medium text-[var(--text-muted)] hover:text-[var(--color-brand)] transition-colors px-2 py-1 rounded border border-[var(--border-color)] bg-[var(--bg-surface-subtle)]"
+              aria-label={isBangla ? `${project.title} লাইভ প্রজেক্ট ওপেন করুন` : `Open live project for ${project.title}`}
+            >
+              <span>{isBangla ? 'লাইভ' : 'View Live'}</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
+
+          <Link
+            to={detailPath}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--color-brand)] hover:text-[var(--color-brand-hover)] transition-colors group-hover:translate-x-0.5 duration-150"
+            aria-label={isBangla ? `${project.title}-এর কেস স্টাডি দেখুন` : `View case study for ${project.title}`}
+          >
+            <span>{isBangla ? 'কেস স্টাডি' : 'Case Study'}</span>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </article>
   );

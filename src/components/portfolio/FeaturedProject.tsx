@@ -1,10 +1,11 @@
 import React from 'react';
-import { ArrowRight, Check, Globe, Smartphone, Code2 } from 'lucide-react';
+import { ArrowRight, Check, Globe, ExternalLink } from 'lucide-react';
 import { PortfolioProject } from '../../types/portfolio';
 import { ProjectVisual } from './ProjectVisual';
 import { Button } from '../ui/Button';
 import { Link } from '../../lib/router';
 import { cn } from '../../lib/utils';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export interface FeaturedProjectProps {
   project: PortfolioProject;
@@ -15,6 +16,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
   project,
   className,
 }) => {
+  const { isBangla } = useTranslation();
   const detailPath = `/portfolio/${project.slug}`;
 
   return (
@@ -31,7 +33,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
           {/* Top Row: Category & Status */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span className="type-caption font-bold tracking-wider uppercase text-[var(--color-brand)] font-mono text-[11px]">
-              FEATURED // {project.category.replace('-', ' ')}
+              {isBangla ? 'ফিচার্ড প্রজেক্ট' : 'FEATURED PROJECT'} // {project.category.replace('-', ' ')}
             </span>
 
             {project.status && (
@@ -43,7 +45,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
                     : 'bg-[var(--color-brand-subtle)] text-[var(--color-brand)] border-[var(--color-brand-muted)]'
                 )}
               >
-                {project.status.replace('-', ' ')}
+                {project.status === 'live' ? (isBangla ? 'লাইভ' : 'live') : project.status.replace('-', ' ')}
               </span>
             )}
           </div>
@@ -72,7 +74,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
           {project.keyFeatures && project.keyFeatures.length > 0 && (
             <div className="pt-1 space-y-2.5">
               <span className="type-caption font-mono uppercase tracking-wider text-[var(--text-muted)] text-[11px] block">
-                Engineering Highlights
+                {isBangla ? 'মূল বৈশিষ্ট্যসমূহ' : 'Key Highlights'}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 {project.keyFeatures.map((feat) => (
@@ -110,18 +112,27 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
                 size="md"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                Explore Case Study
+                {isBangla ? 'কেস স্টাডি দেখুন' : 'Explore Case Study'}
               </Button>
             </Link>
 
-            <Link to="/products/buildest-bd" className="inline-block">
-              <Button
-                variant="outline"
-                size="md"
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
               >
-                View Product Page
-              </Button>
-            </Link>
+                <Button
+                  variant="outline"
+                  size="md"
+                  leftIcon={<Globe className="w-4 h-4" />}
+                  rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
+                >
+                  {isBangla ? 'লাইভ প্রজেক্ট দেখুন' : 'View Live Project'}
+                </Button>
+              </a>
+            )}
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ExternalLink, Check, Smartphone, Globe, Ruler } from 'lucide-react';
+import { ArrowRight, ExternalLink, Check, Smartphone, Globe, Calculator, Ruler, Compass, Building2 } from 'lucide-react';
 import { Product } from '../../types/product';
 import { ProductPlatform } from './ProductPlatform';
 import { ProductStatusBadge } from './ProductStatusBadge';
@@ -7,6 +7,7 @@ import { ProductVisualFrame } from './ProductVisualFrame';
 import { Button } from '../ui/Button';
 import { Link } from '../../lib/router';
 import { cn } from '../../lib/utils';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export interface FeaturedProductProps {
   product: Product;
@@ -17,7 +18,18 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
   product,
   className,
 }) => {
+  const { isBangla } = useTranslation();
   const detailPath = `/products/${product.slug}`;
+  const liveWeb = product.liveUrl || product.websiteUrl;
+  const liveAndroid = product.playStoreUrl || product.androidUrl;
+
+  const getProductIcon = () => {
+    const s = product.slug.toLowerCase();
+    if (s.includes('salary')) return <Calculator className="w-5 h-5" />;
+    if (s.includes('cdesk') || s.includes('civildesk')) return <Building2 className="w-5 h-5" />;
+    if (s.includes('estimator')) return <Compass className="w-5 h-5" />;
+    return <Ruler className="w-5 h-5" />;
+  };
 
   return (
     <article
@@ -42,7 +54,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
           <div className="space-y-2">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--color-brand)] shadow-2xs shrink-0" aria-hidden="true">
-                <Ruler className="w-5 h-5" />
+                {getProductIcon()}
               </div>
               <h3
                 id={`featured-product-heading-${product.id}`}
@@ -68,7 +80,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
           {product.features && product.features.length > 0 && (
             <div className="pt-1 space-y-2.5">
               <span className="type-caption font-mono uppercase tracking-wider text-[var(--text-muted)] text-[11px] block">
-                Core System Modules
+                {isBangla ? 'মূল ফিচারসমূহ' : 'Core System Modules'}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                 {product.features.map((feat) => (
@@ -84,7 +96,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
           {/* Platform Indicators */}
           <div className="pt-3 border-t border-[var(--border-color)] flex items-center justify-between gap-4">
             <span className="type-caption font-mono uppercase text-[11px] text-[var(--text-muted)]">
-              Supported Platforms
+              {isBangla ? 'সাপোর্টেড প্ল্যাটফর্ম' : 'Supported Platforms'}
             </span>
             <ProductPlatform platforms={product.platforms} variant="inline" />
           </div>
@@ -99,14 +111,14 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
                 size="md"
                 rightIcon={<ArrowRight className="w-4 h-4" />}
               >
-                View Product Details
+                {isBangla ? 'বিস্তারিত দেখুন' : 'View Product Details'}
               </Button>
             </Link>
 
             {/* Optional Live External Web App URL */}
-            {product.websiteUrl && (
+            {liveWeb && (
               <a
-                href={product.websiteUrl}
+                href={liveWeb}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Open ${product.name} Web App (opens in new tab)`}
@@ -119,15 +131,15 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
                   leftIcon={<Globe className="w-4 h-4" />}
                   rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
                 >
-                  Open Web App
+                  {isBangla ? 'লাইভ ওয়েব অ্যাপ' : 'Open Web App'}
                 </Button>
               </a>
             )}
 
             {/* Optional Live Android APK / Play Store URL */}
-            {product.androidUrl && (
+            {liveAndroid && (
               <a
-                href={product.androidUrl}
+                href={liveAndroid}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Download ${product.name} Android APK (opens in new tab)`}
@@ -140,7 +152,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
                   leftIcon={<Smartphone className="w-4 h-4" />}
                   rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
                 >
-                  Download Android
+                  {isBangla ? 'অ্যান্ড্রয়েড অ্যাপ' : 'Download Android'}
                 </Button>
               </a>
             )}
@@ -149,7 +161,7 @@ export const FeaturedProduct: React.FC<FeaturedProductProps> = ({
 
         {/* Right Column: Large Technical Product Interface Visual */}
         <div className="lg:col-span-6 w-full">
-          <ProductVisualFrame product={product} />
+          <ProductVisualFrame product={product} size="lg" />
         </div>
       </div>
     </article>

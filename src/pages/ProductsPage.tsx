@@ -4,6 +4,7 @@ import { PageHeader } from '../components/layout/PageHeader';
 import { Container } from '../components/layout/Container';
 import { Section } from '../components/ui/Section';
 import { ProductCard } from '../components/products/ProductCard';
+import { FeaturedProduct } from '../components/products/FeaturedProduct';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Button } from '../components/ui/Button';
 import { getProducts } from '../data/products';
@@ -98,12 +99,16 @@ export const ProductsPage: React.FC = () => {
   return (
     <div className="w-full flex-1 flex flex-col">
       <SEO
-        title="Software Products — BDCON Labs"
-        description="Catalog of proprietary software products and digital tools built by BDCON Labs, including BuildEst BD."
+        title={isBangla ? 'সফটওয়্যার প্রোডাক্টস — BDCON Labs' : 'Software Products — BDCON Labs'}
+        description={
+          isBangla
+            ? 'বাস্তব সমস্যা সমাধানে BDCON Labs-এর তৈরি বিশেষায়িত সফটওয়্যার — SalaryBD, CivilDesk, Civil Estimator BD ও BuildEst BD।'
+            : 'Catalog of software products and specialized digital tools built by BDCON Labs, including SalaryBD, CivilDesk, Civil Estimator BD, and BuildEst BD.'
+        }
         canonicalPath="/products"
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: 'Products', url: '/products' },
+          { name: isBangla ? 'প্রোডাক্টস' : 'Products', url: '/products' },
         ]}
       />
       {/* 1. Page Header */}
@@ -222,20 +227,39 @@ export const ProductsPage: React.FC = () => {
               </Button>
             </div>
           ) : filteredProducts.length > 0 ? (
-            <div className="space-y-6">
-              {/* Active count meta */}
-              <div className={`flex items-center justify-between text-xs text-[var(--text-muted)] ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
-                <span>
-                  {isBangla ? `মোট ${filteredProducts.length}টি প্রোডাক্ট প্রদর্শিত হচ্ছে` : `Showing ${filteredProducts.length} ${filteredProducts.length === 1 ? 'product' : 'products'}`}
-                </span>
-                <span>{isBangla ? 'BDCON Labs সফটওয়্যার ক্যাটালগ' : 'BDCON Labs Proprietary Catalog'}</span>
-              </div>
+            <div className="space-y-8 sm:space-y-10">
+              {/* Featured Showcase on unfiltered view */}
+              {!hasActiveFilters && selectedCategory === 'all' && filteredProducts.length > 1 && (
+                <div className="space-y-4">
+                  <div className={`flex items-center justify-between text-xs text-[var(--text-muted)] border-b border-[var(--border-color)] pb-2 ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
+                    <span className="uppercase tracking-wider font-semibold text-[var(--color-brand)]">
+                      {isBangla ? 'ফিচার্ড প্রোডাক্ট' : 'FEATURED PRODUCT'}
+                    </span>
+                    <span>{isBangla ? 'সক্রিয় সংস্করণ' : 'Active Release'}</span>
+                  </div>
+                  <FeaturedProduct product={filteredProducts[0]} />
+                </div>
+              )}
 
-              {/* Responsive Product Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+              {/* Grid Section */}
+              <div className="space-y-4">
+                <div className={`flex items-center justify-between text-xs text-[var(--text-muted)] border-b border-[var(--border-color)] pb-2 ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
+                  <span>
+                    {!hasActiveFilters && selectedCategory === 'all' && filteredProducts.length > 1
+                      ? (isBangla ? 'অন্যান্য সফটওয়্যার প্রোডাক্ট' : 'All Software Products')
+                      : (isBangla ? `মোট ${filteredProducts.length}টি প্রোডাক্ট প্রদর্শিত হচ্ছে` : `Showing ${filteredProducts.length} ${filteredProducts.length === 1 ? 'product' : 'products'}`)}
+                  </span>
+                  <span>{isBangla ? 'BDCON Labs সফটওয়্যার ক্যাটালগ' : 'BDCON Labs Proprietary Catalog'}</span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                  {(!hasActiveFilters && selectedCategory === 'all' && filteredProducts.length > 1
+                    ? filteredProducts.slice(1)
+                    : filteredProducts
+                  ).map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
               </div>
             </div>
           ) : hasActiveFilters ? (

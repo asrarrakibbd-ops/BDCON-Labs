@@ -25,8 +25,10 @@ import { PortfolioProject } from '../types/portfolio';
 import { SEO } from '../components/common/SEO';
 import { buildCaseStudySchema } from '../lib/structuredData';
 import { trackEvent } from '../lib/analytics';
+import { useTranslation } from '../hooks/useTranslation';
 
 export const ProjectDetailPage: React.FC = () => {
+  const { isBangla } = useTranslation();
   const { path } = useRouter();
   const [project, setProject] = useState<PortfolioProject | null>(null);
   const [otherProjects, setOtherProjects] = useState<PortfolioProject[]>([]);
@@ -212,7 +214,7 @@ export const ProjectDetailPage: React.FC = () => {
                 {project.liveUrl && (
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                     <Button variant="primary" size="md" leftIcon={<Globe className="w-4 h-4" />} rightIcon={<ExternalLink className="w-3.5 h-3.5" />}>
-                      Live Project
+                      {isBangla ? 'লাইভ প্রজেক্ট দেখুন' : 'Live Project'}
                     </Button>
                   </a>
                 )}
@@ -220,23 +222,23 @@ export const ProjectDetailPage: React.FC = () => {
                 {project.repositoryUrl && (
                   <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="md" leftIcon={<Code2 className="w-4 h-4" />} rightIcon={<ExternalLink className="w-3.5 h-3.5" />}>
-                      Repository
+                      {isBangla ? 'সোর্স রিপোজিটরি' : 'Repository'}
                     </Button>
                   </a>
                 )}
 
-                {/* If proprietary product, link to dedicated product page */}
-                {project.slug === 'buildest-bd' && (
-                  <Link to="/products/buildest-bd">
+                {/* If software product, link to dedicated product page */}
+                {['buildest-bd', 'salary-bd', 'civildesk', 'civil-estimator-bd'].includes(project.slug) && (
+                  <Link to={`/products/${project.slug}`}>
                     <Button variant="secondary" size="md">
-                      View Product Page
+                      {isBangla ? 'প্রোডাক্ট বিবরণ দেখুন' : 'View Product Page'}
                     </Button>
                   </Link>
                 )}
 
                 <Link to="/start-project">
                   <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                    Start Similar Project
+                    {isBangla ? 'প্রজেক্ট নিয়ে কথা বলুন' : 'Start Similar Project'}
                   </Button>
                 </Link>
               </div>

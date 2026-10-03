@@ -631,7 +631,7 @@ export const StartProjectPage: React.FC = () => {
                         ))}
                       </select>
                       <span className="type-caption text-[11px] text-[var(--text-muted)] block">
-                        {isBangla ? 'প্রজেক্ট সমাপ্তি বা প্রথম সংস্করণ (MVP) চালুর সম্ভাব্য সময়।' : 'Target completion or MVP deployment horizon.'}
+                        {isBangla ? 'প্রজেক্ট সমাপ্তি বা প্রথম কার্যকর সংস্করণ চালুর সম্ভাব্য সময়।' : 'Target completion or MVP deployment horizon.'}
                       </span>
                     </div>
                   </div>

@@ -40,12 +40,24 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Primary Page H1 Headline */}
-            <h1 className={`type-display text-[var(--text-primary)] font-bold tracking-tight text-balance ${isBangla ? 'font-bangla-serif' : ''}`}>
+            <h1 
+              className={`text-[var(--text-primary)] font-bold text-balance ${
+                isBangla 
+                  ? 'font-bangla-serif tracking-normal leading-[1.25] text-3xl sm:text-4xl lg:text-[44px]' 
+                  : 'type-display tracking-tight'
+              }`}
+            >
               {t('hero.headline')}
             </h1>
 
             {/* Supporting Copy */}
-            <p className={`type-body-large text-[var(--text-secondary)] max-w-2xl text-balance leading-relaxed ${isBangla ? 'font-bangla-sans' : ''}`}>
+            <p 
+              className={`max-w-2xl text-balance leading-relaxed text-[var(--text-secondary)] ${
+                isBangla 
+                  ? 'font-bangla-sans text-base sm:text-lg leading-[1.7]' 
+                  : 'type-body-large'
+              }`}
+            >
               {t('hero.description')}
             </p>
 
@@ -57,7 +69,7 @@ export const HeroSection: React.FC = () => {
                   variant="primary"
                   size="lg"
                   rightIcon={<ArrowRight className="w-4 h-4" />}
-                  className="w-full sm:w-auto"
+                  className={`w-full sm:w-auto ${isBangla ? 'font-bangla-sans text-[15px]' : ''}`}
                 >
                   {t('hero.exploreProducts')}
                 </Button>
@@ -68,7 +80,7 @@ export const HeroSection: React.FC = () => {
                   as="span"
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  className={`w-full sm:w-auto ${isBangla ? 'font-bangla-sans text-[15px]' : ''}`}
                 >
                   {t('hero.startProject')}
                 </Button>
