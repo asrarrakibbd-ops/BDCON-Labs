@@ -47,6 +47,7 @@ export interface Product {
   logo?: string;
   logoUrl?: string;
   screenshotUrl?: string;
+  coverImage?: string;
   websiteUrl?: string;
   liveUrl?: string;
   androidUrl?: string;

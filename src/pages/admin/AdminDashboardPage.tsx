@@ -389,12 +389,19 @@ export const AdminDashboardPage: React.FC = () => {
           <h2 className={`text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>
             {isBangla ? 'লাইভ প্রোডাক্ট ও কনটেন্ট ওভারভিউ' : 'PUBLISHED CONTENT SUMMARY'}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs font-mono">
             <Link
               to="/admin/products"
               className="p-3.5 rounded-lg border border-[var(--border-color)] hover:border-[var(--color-brand)] transition-colors flex items-center justify-between min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]"
             >
-              <span>{isBangla ? 'সফটওয়্যার প্রোডাক্টস' : 'Products'} ({stats?.totalProducts ?? 0})</span>
+              <span>{isBangla ? 'প্রোডাক্টস' : 'Products'} ({stats?.totalProducts ?? 0})</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)]" aria-hidden="true" />
+            </Link>
+            <Link
+              to="/admin/portfolio"
+              className="p-3.5 rounded-lg border border-[var(--border-color)] hover:border-[var(--color-brand)] transition-colors flex items-center justify-between min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]"
+            >
+              <span>{isBangla ? 'পোর্টফোলিও' : 'Portfolio'} ({stats?.totalPortfolio ?? 0})</span>
               <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)]" aria-hidden="true" />
             </Link>
             <Link
@@ -408,14 +415,14 @@ export const AdminDashboardPage: React.FC = () => {
               to="/admin/blog"
               className="p-3.5 rounded-lg border border-[var(--border-color)] hover:border-[var(--color-brand)] transition-colors flex items-center justify-between min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]"
             >
-              <span>{isBangla ? 'প্রবন্ধ ও চিন্তন' : 'Essays'} ({stats?.totalWriting ?? 0})</span>
+              <span>{isBangla ? 'প্রবন্ধ ও ব্লগ' : 'Essays'} ({stats?.totalWriting ?? 0})</span>
               <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)]" aria-hidden="true" />
             </Link>
             <Link
               to="/admin/books"
               className="p-3.5 rounded-lg border border-[var(--border-color)] hover:border-[var(--color-brand)] transition-colors flex items-center justify-between min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]"
             >
-              <span>{isBangla ? 'প্রকাশিত বইসমূহ' : 'Books'} ({stats?.totalBooks ?? 0})</span>
+              <span>{isBangla ? 'বইসমূহ' : 'Books'} ({stats?.totalBooks ?? 0})</span>
               <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)]" aria-hidden="true" />
             </Link>
           </div>

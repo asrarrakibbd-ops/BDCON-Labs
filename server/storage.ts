@@ -185,3 +185,198 @@ export function saveEngineeringInquiry(record: Omit<EngineeringInquiryRecord, 'i
   writeJsonFile('engineering_inquiries.json', inquiries);
   return newRecord;
 }
+
+// -----------------------------------------------------------------------------
+// Books CRUD Operations
+// -----------------------------------------------------------------------------
+export function getStoredBooks(): any[] {
+  try {
+    const { BOOKS_DATA } = require('../src/data/books');
+    return readJsonFile<any[]>('books.json', BOOKS_DATA || []);
+  } catch {
+    return readJsonFile<any[]>('books.json', []);
+  }
+}
+
+export function saveStoredBook(record: any): any {
+  const books = getStoredBooks();
+  const id = record.id || `book_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+  const slug = record.slug || id;
+  const newBook = { ...record, id, slug };
+  books.unshift(newBook);
+  writeJsonFile('books.json', books);
+  return newBook;
+}
+
+export function updateStoredBook(id: string, updates: any): any | null {
+  const books = getStoredBooks();
+  const idx = books.findIndex(b => String(b.id) === String(id) || String(b.slug) === String(id));
+  if (idx === -1) return null;
+  books[idx] = { ...books[idx], ...updates };
+  writeJsonFile('books.json', books);
+  return books[idx];
+}
+
+export function deleteStoredBook(id: string): boolean {
+  const books = getStoredBooks();
+  const filtered = books.filter(b => String(b.id) !== String(id) && String(b.slug) !== String(id));
+  if (filtered.length === books.length) return false;
+  writeJsonFile('books.json', filtered);
+  return true;
+}
+
+// -----------------------------------------------------------------------------
+// Writing / Essays CRUD Operations
+// -----------------------------------------------------------------------------
+export function getStoredWriting(): any[] {
+  try {
+    const { WRITING_DATA } = require('../src/data/writing');
+    return readJsonFile<any[]>('writing.json', WRITING_DATA || []);
+  } catch {
+    return readJsonFile<any[]>('writing.json', []);
+  }
+}
+
+export function saveStoredWriting(record: any): any {
+  const list = getStoredWriting();
+  const id = record.id || `essay_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+  const slug = record.slug || id;
+  const newEntry = { ...record, id, slug };
+  list.unshift(newEntry);
+  writeJsonFile('writing.json', list);
+  return newEntry;
+}
+
+export function updateStoredWriting(id: string, updates: any): any | null {
+  const list = getStoredWriting();
+  const idx = list.findIndex(e => String(e.id) === String(id) || String(e.slug) === String(id));
+  if (idx === -1) return null;
+  list[idx] = { ...list[idx], ...updates };
+  writeJsonFile('writing.json', list);
+  return list[idx];
+}
+
+export function deleteStoredWriting(id: string): boolean {
+  const list = getStoredWriting();
+  const filtered = list.filter(e => String(e.id) !== String(id) && String(e.slug) !== String(id));
+  if (filtered.length === list.length) return false;
+  writeJsonFile('writing.json', filtered);
+  return true;
+}
+
+// -----------------------------------------------------------------------------
+// Portfolio Projects CRUD Operations
+// -----------------------------------------------------------------------------
+export function getStoredPortfolio(): any[] {
+  try {
+    const { PORTFOLIO_PROJECTS } = require('../src/data/portfolio');
+    return readJsonFile<any[]>('portfolio.json', PORTFOLIO_PROJECTS || []);
+  } catch {
+    return readJsonFile<any[]>('portfolio.json', []);
+  }
+}
+
+export function saveStoredPortfolio(record: any): any {
+  const list = getStoredPortfolio();
+  const id = record.id || `proj_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+  const slug = record.slug || id;
+  const newProj = { ...record, id, slug };
+  list.unshift(newProj);
+  writeJsonFile('portfolio.json', list);
+  return newProj;
+}
+
+export function updateStoredPortfolio(id: string, updates: any): any | null {
+  const list = getStoredPortfolio();
+  const idx = list.findIndex(p => String(p.id) === String(id) || String(p.slug) === String(id));
+  if (idx === -1) return null;
+  list[idx] = { ...list[idx], ...updates };
+  writeJsonFile('portfolio.json', list);
+  return list[idx];
+}
+
+export function deleteStoredPortfolio(id: string): boolean {
+  const list = getStoredPortfolio();
+  const filtered = list.filter(p => String(p.id) !== String(id) && String(p.slug) !== String(id));
+  if (filtered.length === list.length) return false;
+  writeJsonFile('portfolio.json', filtered);
+  return true;
+}
+
+// -----------------------------------------------------------------------------
+// Services CRUD Operations
+// -----------------------------------------------------------------------------
+export function getStoredServices(): any[] {
+  try {
+    const { SERVICES_DATA } = require('../src/data/services');
+    return readJsonFile<any[]>('services.json', SERVICES_DATA || []);
+  } catch {
+    return readJsonFile<any[]>('services.json', []);
+  }
+}
+
+export function saveStoredService(record: any): any {
+  const list = getStoredServices();
+  const id = record.id || `srv_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+  const slug = record.slug || id;
+  const newSrv = { ...record, id, slug };
+  list.unshift(newSrv);
+  writeJsonFile('services.json', list);
+  return newSrv;
+}
+
+export function updateStoredService(id: string, updates: any): any | null {
+  const list = getStoredServices();
+  const idx = list.findIndex(s => String(s.id) === String(id) || String(s.slug) === String(id));
+  if (idx === -1) return null;
+  list[idx] = { ...list[idx], ...updates };
+  writeJsonFile('services.json', list);
+  return list[idx];
+}
+
+export function deleteStoredService(id: string): boolean {
+  const list = getStoredServices();
+  const filtered = list.filter(s => String(s.id) !== String(id) && String(s.slug) !== String(id));
+  if (filtered.length === list.length) return false;
+  writeJsonFile('services.json', filtered);
+  return true;
+}
+
+// -----------------------------------------------------------------------------
+// Products CRUD Operations
+// -----------------------------------------------------------------------------
+export function getStoredProducts(): any[] {
+  try {
+    const { PRODUCTS_DATA } = require('../src/data/products');
+    return readJsonFile<any[]>('products.json', PRODUCTS_DATA || []);
+  } catch {
+    return readJsonFile<any[]>('products.json', []);
+  }
+}
+
+export function saveStoredProduct(record: any): any {
+  const list = getStoredProducts();
+  const id = record.id || `prod_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+  const slug = record.slug || id;
+  const newProd = { ...record, id, slug };
+  list.unshift(newProd);
+  writeJsonFile('products.json', list);
+  return newProd;
+}
+
+export function updateStoredProduct(id: string, updates: any): any | null {
+  const list = getStoredProducts();
+  const idx = list.findIndex(p => String(p.id) === String(id) || String(p.slug) === String(id));
+  if (idx === -1) return null;
+  list[idx] = { ...list[idx], ...updates };
+  writeJsonFile('products.json', list);
+  return list[idx];
+}
+
+export function deleteStoredProduct(id: string): boolean {
+  const list = getStoredProducts();
+  const filtered = list.filter(p => String(p.id) !== String(id) && String(p.slug) !== String(id));
+  if (filtered.length === list.length) return false;
+  writeJsonFile('products.json', filtered);
+  return true;
+}

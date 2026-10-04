@@ -12,6 +12,26 @@ import {
   deleteProjectRequest,
   getEngineeringInquiries,
   saveEngineeringInquiry,
+  getStoredBooks,
+  saveStoredBook,
+  updateStoredBook,
+  deleteStoredBook,
+  getStoredWriting,
+  saveStoredWriting,
+  updateStoredWriting,
+  deleteStoredWriting,
+  getStoredPortfolio,
+  saveStoredPortfolio,
+  updateStoredPortfolio,
+  deleteStoredPortfolio,
+  getStoredServices,
+  saveStoredService,
+  updateStoredService,
+  deleteStoredService,
+  getStoredProducts,
+  saveStoredProduct,
+  updateStoredProduct,
+  deleteStoredProduct,
 } from './server/storage';
 
 dotenv.config();
@@ -345,6 +365,121 @@ app.delete('/api/admin/project-requests/:id', (req, res) => {
     return res.status(404).json({ success: false, error: 'Project request not found' });
   }
   return res.json({ success: true });
+});
+
+// -----------------------------------------------------------------------------
+// 11. Admin Books Management Endpoints
+// -----------------------------------------------------------------------------
+app.get('/api/admin/books', (_req, res) => {
+  res.json({ success: true, data: getStoredBooks() });
+});
+
+app.post('/api/admin/books', (req, res) => {
+  const book = saveStoredBook(req.body);
+  res.json({ success: true, data: book });
+});
+
+app.patch('/api/admin/books/:id', (req, res) => {
+  const updated = updateStoredBook(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ success: false, error: 'Book not found' });
+  res.json({ success: true, data: updated });
+});
+
+app.delete('/api/admin/books/:id', (req, res) => {
+  const ok = deleteStoredBook(req.params.id);
+  res.json({ success: ok });
+});
+
+// -----------------------------------------------------------------------------
+// 12. Admin Writing / Blog Management Endpoints
+// -----------------------------------------------------------------------------
+app.get('/api/admin/writing', (_req, res) => {
+  res.json({ success: true, data: getStoredWriting() });
+});
+
+app.post('/api/admin/writing', (req, res) => {
+  const entry = saveStoredWriting(req.body);
+  res.json({ success: true, data: entry });
+});
+
+app.patch('/api/admin/writing/:id', (req, res) => {
+  const updated = updateStoredWriting(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ success: false, error: 'Writing entry not found' });
+  res.json({ success: true, data: updated });
+});
+
+app.delete('/api/admin/writing/:id', (req, res) => {
+  const ok = deleteStoredWriting(req.params.id);
+  res.json({ success: ok });
+});
+
+// -----------------------------------------------------------------------------
+// 13. Admin Portfolio Projects Endpoints
+// -----------------------------------------------------------------------------
+app.get('/api/admin/portfolio', (_req, res) => {
+  res.json({ success: true, data: getStoredPortfolio() });
+});
+
+app.post('/api/admin/portfolio', (req, res) => {
+  const project = saveStoredPortfolio(req.body);
+  res.json({ success: true, data: project });
+});
+
+app.patch('/api/admin/portfolio/:id', (req, res) => {
+  const updated = updateStoredPortfolio(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ success: false, error: 'Project not found' });
+  res.json({ success: true, data: updated });
+});
+
+app.delete('/api/admin/portfolio/:id', (req, res) => {
+  const ok = deleteStoredPortfolio(req.params.id);
+  res.json({ success: ok });
+});
+
+// -----------------------------------------------------------------------------
+// 14. Admin Services Endpoints
+// -----------------------------------------------------------------------------
+app.get('/api/admin/services', (_req, res) => {
+  res.json({ success: true, data: getStoredServices() });
+});
+
+app.post('/api/admin/services', (req, res) => {
+  const service = saveStoredService(req.body);
+  res.json({ success: true, data: service });
+});
+
+app.patch('/api/admin/services/:id', (req, res) => {
+  const updated = updateStoredService(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ success: false, error: 'Service not found' });
+  res.json({ success: true, data: updated });
+});
+
+app.delete('/api/admin/services/:id', (req, res) => {
+  const ok = deleteStoredService(req.params.id);
+  res.json({ success: ok });
+});
+
+// -----------------------------------------------------------------------------
+// 15. Admin Products Endpoints
+// -----------------------------------------------------------------------------
+app.get('/api/admin/products', (_req, res) => {
+  res.json({ success: true, data: getStoredProducts() });
+});
+
+app.post('/api/admin/products', (req, res) => {
+  const product = saveStoredProduct(req.body);
+  res.json({ success: true, data: product });
+});
+
+app.patch('/api/admin/products/:id', (req, res) => {
+  const updated = updateStoredProduct(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ success: false, error: 'Product not found' });
+  res.json({ success: true, data: updated });
+});
+
+app.delete('/api/admin/products/:id', (req, res) => {
+  const ok = deleteStoredProduct(req.params.id);
+  res.json({ success: ok });
 });
 
 // =============================================================================
