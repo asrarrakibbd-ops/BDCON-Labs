@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from 'react';
-import { Loader2 } from 'lucide-react';
 import { ThemeProvider } from './context/ThemeContext';
 import { I18nProvider } from './i18n/I18nContext';
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -8,6 +7,7 @@ import { AppLayout } from './components/layout/AppLayout';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { AdminRoute } from './components/admin/AdminRoute';
 import { SEO } from './components/common/SEO';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 // Public core pages (eagerly loaded for optimal FCP / LCP performance)
 import { HomePage } from './pages/HomePage';
@@ -48,15 +48,9 @@ const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage').t
 
 import { ALL_ROUTES } from './pages/routes';
 import { RouteConfig } from './types/navigation';
+import { AdminDashboardSkeleton } from './components/admin/AdminDashboardSkeleton';
 
-const AdminLoadingFallback: React.FC = () => (
-  <div className="min-h-screen w-full flex items-center justify-center bg-[var(--bg-canvas)] text-[var(--text-primary)]">
-    <div className="flex flex-col items-center gap-3 p-6 text-center">
-      <Loader2 className="w-6 h-6 animate-spin text-[var(--color-brand)]" />
-      <span className="text-xs font-mono text-[var(--text-muted)]">Loading Admin Console...</span>
-    </div>
-  </div>
-);
+const AdminLoadingFallback: React.FC = () => <AdminDashboardSkeleton />;
 
 const AppRoutes: React.FC = () => {
   const { path } = useRouter();
@@ -311,16 +305,55 @@ const AppRoutes: React.FC = () => {
 const MainRouter: React.FC = () => {
   const { path } = useRouter();
   const isAdmin = path.startsWith('/admin');
+  const shouldReduceMotion = useReducedMotion();
+
+  // Smooth fade-in and slide-up animation configuration
+  const pageVariants = {
+    initial: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    exit: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 },
+  };
+
+  const pageTransition = {
+    duration: 0.26,
+    ease: [0.22, 1, 0.36, 1] as const,
+  };
 
   // Admin section handles its own isolated administrative layout shell & login card
   if (isAdmin) {
-    return <AppRoutes />;
+    return (
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={path}
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={pageTransition}
+          className="w-full flex-1 flex flex-col"
+        >
+          <AppRoutes />
+        </motion.div>
+      </AnimatePresence>
+    );
   }
 
   // Public website uses standard navigation bar and footer
   return (
     <AppLayout>
-      <AppRoutes />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={path}
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={pageTransition}
+          className="w-full flex-1 flex flex-col"
+        >
+          <AppRoutes />
+        </motion.div>
+      </AnimatePresence>
     </AppLayout>
   );
 };

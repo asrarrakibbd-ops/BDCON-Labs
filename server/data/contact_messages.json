@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Tanvir Hossain",
+    "email": "tanvir@example.com",
+    "phone": "+8801812345678",
+    "subject": "Custom Web Application Consultation",
+    "message": "We need a high-performance web platform built with React and modern tech stack.",
+    "status": "new",
+    "id": "msg_1791131023813_o9foq",
+    "replied_at": null,
+    "created_at": "2026-10-04T16:23:43.813Z",
+    "updated_at": "2026-10-04T16:23:43.813Z"
+  }
+]

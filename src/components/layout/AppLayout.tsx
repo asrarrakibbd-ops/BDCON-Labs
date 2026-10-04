@@ -1,15 +1,12 @@
 import React, { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { useRouter } from '../../lib/router';
 
 export interface AppLayoutProps {
   children: ReactNode;
 }
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
-  const { path } = useRouter();
-
   return (
     <div className="flex flex-col min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] transition-colors overflow-x-hidden selection:bg-[var(--color-brand-muted)] selection:text-[var(--color-brand)]">
       {/* Accessible skip link for keyboard navigation */}
@@ -22,12 +19,10 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
       <Navbar />
 
-      {/* Main page view with subtle lightweight route transition */}
       <main
-        key={path}
         id="main-content"
-        className="flex-1 w-full animate-in fade-in duration-150 transition-all flex flex-col"
         tabIndex={-1}
+        className="flex-1 w-full flex flex-col"
       >
         {children}
       </main>

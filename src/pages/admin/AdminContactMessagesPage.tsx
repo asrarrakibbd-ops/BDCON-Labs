@@ -19,7 +19,8 @@ import {
   Trash2,
   Save,
   Loader2,
-  Reply
+  Reply,
+  Bell
 } from 'lucide-react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { 
@@ -28,6 +29,7 @@ import {
   deleteAdminContactMessage, 
   ContactMessageRow 
 } from '../../data/admin/contactMessages';
+import { subscribeInquiryUpdates } from '../../lib/events/inquirySync';
 import { Button } from '../../components/ui/Button';
 import { AdminConfirmModal } from '../../components/admin/AdminConfirmModal';
 
@@ -40,6 +42,7 @@ export const AdminContactMessagesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [liveToast, setLiveToast] = useState<string | null>(null);
 
   // Selected Message for detail modal
   const [selectedMessage, setSelectedMessage] = useState<ContactMessageRow | null>(null);
@@ -58,9 +61,9 @@ export const AdminContactMessagesPage: React.FC = () => {
 
   const pageSize = 15;
 
-  const loadMessages = useCallback(async () => {
+  const loadMessages = useCallback(async (showSpinner = true) => {
     try {
-      setLoading(true);
+      if (showSpinner) setLoading(true);
       setError(null);
       const res = await getAdminContactMessages({
         page,
@@ -74,13 +77,38 @@ export const AdminContactMessagesPage: React.FC = () => {
     } catch (err: any) {
       setError(err?.message || 'Failed to load contact messages.');
     } finally {
-      setLoading(false);
+      if (showSpinner) setLoading(false);
     }
   }, [page, statusFilter, searchQuery]);
 
   useEffect(() => {
     document.title = 'Contact Messages — BDCON Labs Admin';
-    loadMessages();
+    loadMessages(true);
+  }, [loadMessages]);
+
+  // Real-time synchronization subscription and auto-poll
+  useEffect(() => {
+    const unsubscribe = subscribeInquiryUpdates((event) => {
+      // Instantly reload messages list when any inquiry event occurs
+      loadMessages(false);
+      if (event.type === 'contact') {
+        const sender = event.data?.name ? `from ${event.data.name}` : '';
+        setLiveToast(`🔔 New contact message received ${sender}!`);
+        setTimeout(() => setLiveToast(null), 6000);
+      }
+    });
+
+    // 5-second background poll when tab is visible
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        loadMessages(false);
+      }
+    }, 5000);
+
+    return () => {
+      unsubscribe();
+      clearInterval(interval);
+    };
   }, [loadMessages]);
 
   // Modal keyboard and focus management
@@ -220,6 +248,44 @@ export const AdminContactMessagesPage: React.FC = () => {
       breadcrumbs={[{ label: 'Admin', href: '/admin' }, { label: 'Contact Messages' }]}
     >
       <div className="space-y-6">
+        {/* Real-time Toast Notification */}
+        {liveToast && (
+          <div 
+            role="status"
+            className="p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-medium flex items-center justify-between gap-3 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300"
+          >
+            <div className="flex items-center gap-2.5">
+              <Bell className="w-4 h-4 text-emerald-500 shrink-0 animate-bounce" aria-hidden="true" />
+              <span>{liveToast}</span>
+            </div>
+            <button 
+              onClick={() => setLiveToast(null)} 
+              className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline px-2 py-1 rounded"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {/* Live Status Sub-header */}
+        <div className="flex items-center justify-between gap-3 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold tracking-wide">
+              Live Sync Active
+            </span>
+            <span className="text-[var(--text-muted)] text-[11px] hidden sm:inline">
+              · Incoming messages appear instantly
+            </span>
+          </div>
+          <span className="text-[var(--text-muted)] text-[11px]">
+            Total: {total} {total === 1 ? 'message' : 'messages'}
+          </span>
+        </div>
+
         {/* Controls Toolbar: Search, Status Filter & Refresh */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Search Input */}
@@ -275,7 +341,7 @@ export const AdminContactMessagesPage: React.FC = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={loadMessages}
+              onClick={() => loadMessages(true)}
               disabled={loading}
               leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />}
               className="min-h-[44px] shrink-0"
@@ -297,7 +363,7 @@ export const AdminContactMessagesPage: React.FC = () => {
             <div className="p-8 text-center space-y-3" role="alert">
               <AlertCircle className="w-8 h-8 text-[var(--color-error)] mx-auto" aria-hidden="true" />
               <p className="text-xs font-mono text-[var(--text-secondary)]">{error}</p>
-              <Button variant="outline" size="sm" onClick={loadMessages} className="min-h-[44px]">
+              <Button variant="outline" size="sm" onClick={() => loadMessages(true)} className="min-h-[44px]">
                 Try Again
               </Button>
             </div>

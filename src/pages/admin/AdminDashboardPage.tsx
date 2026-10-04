@@ -17,12 +17,14 @@ import {
   Clock, 
   CheckCircle2, 
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Bell
 } from 'lucide-react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { getAdminDashboardStats, AdminDashboardStats } from '../../data/admin/stats';
 import { getAdminProjectRequests, ProjectRequestRow } from '../../data/admin/projectRequests';
 import { getAdminContactMessages, ContactMessageRow } from '../../data/admin/contactMessages';
+import { subscribeInquiryUpdates } from '../../lib/events/inquirySync';
 import { Button } from '../../components/ui/Button';
 import { Link } from '../../lib/router';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -34,10 +36,11 @@ export const AdminDashboardPage: React.FC = () => {
   const [recentMessages, setRecentMessages] = useState<ContactMessageRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [liveToast, setLiveToast] = useState<string | null>(null);
 
-  const loadData = useCallback(async () => {
+  const loadData = useCallback(async (showSpinner = true) => {
     try {
-      setLoading(true);
+      if (showSpinner) setLoading(true);
       setError(null);
       const [statsRes, projectsRes, messagesRes] = await Promise.all([
         getAdminDashboardStats(),
@@ -50,14 +53,40 @@ export const AdminDashboardPage: React.FC = () => {
     } catch (err: any) {
       setError(err?.message || 'Failed to load dashboard metrics.');
     } finally {
-      setLoading(false);
+      if (showSpinner) setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     document.title = 'Dashboard — BDCON Labs Admin';
-    loadData();
+    loadData(true);
   }, [loadData]);
+
+  // Real-time synchronization subscription and active auto-poll
+  useEffect(() => {
+    const unsubscribe = subscribeInquiryUpdates((event) => {
+      // Trigger instant background update as soon as any inquiry is created/updated
+      loadData(false);
+      setLiveToast(
+        isBangla
+          ? (event.type === 'project' ? '🔔 নতুন প্রজেক্ট রিকোয়েস্ট এসেছে!' : '🔔 নতুন মেসেজ এসেছে!')
+          : (event.type === 'project' ? '🔔 New project request received!' : '🔔 New message received!')
+      );
+      setTimeout(() => setLiveToast(null), 6000);
+    });
+
+    // 5-second fast background poll when window is visible for cross-device sync
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        loadData(false);
+      }
+    }, 5000);
+
+    return () => {
+      unsubscribe();
+      clearInterval(interval);
+    };
+  }, [loadData, isBangla]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -88,20 +117,47 @@ export const AdminDashboardPage: React.FC = () => {
       breadcrumbs={[{ label: isBangla ? 'অ্যাডমিন' : 'Admin' }, { label: isBangla ? 'ড্যাশবোর্ড' : 'Dashboard' }]}
     >
       <div className="space-y-8">
-        {/* Refresh action bar */}
+        {/* Real-time Toast Notification */}
+        {liveToast && (
+          <div 
+            role="status"
+            className="p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-medium flex items-center justify-between gap-3 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300"
+          >
+            <div className="flex items-center gap-2.5">
+              <Bell className="w-4 h-4 text-emerald-500 shrink-0 animate-bounce" aria-hidden="true" />
+              <span>{liveToast}</span>
+            </div>
+            <button 
+              onClick={() => setLiveToast(null)} 
+              className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline px-2 py-1 rounded"
+            >
+              {isBangla ? 'বন্ধ করুন' : 'Dismiss'}
+            </button>
+          </div>
+        )}
+
+        {/* Refresh & Live Sync action bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
-            <Clock className="w-4 h-4 text-[var(--color-brand)] shrink-0" aria-hidden="true" />
-            <span>{isBangla ? 'রিয়েল-টাইম ডাটাবেজ সিঙ্ক' : 'Real-time database sync'}</span>
+          <div className="flex items-center gap-2.5 text-xs font-mono">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold tracking-wide">
+              {isBangla ? 'লাইভ সিঙ্ক সক্রিয় (রিয়েল-টাইম)' : 'Live Sync Active (Real-Time)'}
+            </span>
+            <span className="text-[var(--text-muted)] text-[11px] hidden sm:inline">
+              · {isBangla ? 'নতুন সাবমিশন সাথে সাথে আপডেট হবে' : 'Inquiries update instantly'}
+            </span>
           </div>
 
           <Button
             variant="outline"
             size="sm"
-            onClick={loadData}
+            onClick={() => loadData(true)}
             disabled={loading}
             leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />}
-            className="min-h-[44px]"
+            className="min-h-[40px]"
             aria-label="Refresh operational metrics"
           >
             {isBangla ? 'রিফ্রেশ করুন' : 'Refresh Data'}
@@ -118,7 +174,7 @@ export const AdminDashboardPage: React.FC = () => {
               <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
               <span>{error}</span>
             </div>
-            <Button variant="ghost" size="sm" onClick={loadData} className="min-h-[40px]">
+            <Button variant="ghost" size="sm" onClick={() => loadData(true)} className="min-h-[40px]">
               {isBangla ? 'আবার চেষ্টা করুন' : 'Retry'}
             </Button>
           </div>

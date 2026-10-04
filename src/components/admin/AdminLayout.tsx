@@ -28,6 +28,7 @@ import { Button } from '../ui/Button';
 import { SEO } from '../common/SEO';
 import { useTranslation } from '../../hooks/useTranslation';
 import { LanguageSwitcher } from '../navigation/LanguageSwitcher';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 export interface AdminLayoutProps {
   children: ReactNode;
@@ -45,6 +46,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   const { user, role, signOut } = useAdminAuth();
   const { isBangla } = useTranslation();
   const { path, navigate } = useRouter();
+  const shouldReduceMotion = useReducedMotion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -395,8 +397,19 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             </div>
           )}
 
-          {/* Child View */}
-          {children}
+          {/* Child View with smooth Framer Motion transition */}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={path}
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="flex-1 w-full"
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </div>

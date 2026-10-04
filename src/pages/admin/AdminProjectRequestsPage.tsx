@@ -21,7 +21,8 @@ import {
   Trash2,
   Save,
   Loader2,
-  ArrowRight
+  ArrowRight,
+  Bell
 } from 'lucide-react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { 
@@ -30,6 +31,7 @@ import {
   deleteAdminProjectRequest, 
   ProjectRequestRow 
 } from '../../data/admin/projectRequests';
+import { subscribeInquiryUpdates } from '../../lib/events/inquirySync';
 import { Button } from '../../components/ui/Button';
 import { AdminConfirmModal } from '../../components/admin/AdminConfirmModal';
 
@@ -42,6 +44,7 @@ export const AdminProjectRequestsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [liveToast, setLiveToast] = useState<string | null>(null);
 
   // Selected Request for detail modal
   const [selectedRequest, setSelectedRequest] = useState<ProjectRequestRow | null>(null);
@@ -61,9 +64,9 @@ export const AdminProjectRequestsPage: React.FC = () => {
 
   const pageSize = 15;
 
-  const loadRequests = useCallback(async () => {
+  const loadRequests = useCallback(async (showSpinner = true) => {
     try {
-      setLoading(true);
+      if (showSpinner) setLoading(true);
       setError(null);
       const res = await getAdminProjectRequests({
         page,
@@ -77,13 +80,38 @@ export const AdminProjectRequestsPage: React.FC = () => {
     } catch (err: any) {
       setError(err?.message || 'Failed to load project requests.');
     } finally {
-      setLoading(false);
+      if (showSpinner) setLoading(false);
     }
   }, [page, statusFilter, searchQuery]);
 
   useEffect(() => {
     document.title = 'Project Requests — BDCON Labs Admin';
-    loadRequests();
+    loadRequests(true);
+  }, [loadRequests]);
+
+  // Real-time synchronization subscription and auto-poll
+  useEffect(() => {
+    const unsubscribe = subscribeInquiryUpdates((event) => {
+      // Instantly reload project requests list when any inquiry event occurs
+      loadRequests(false);
+      if (event.type === 'project') {
+        const sender = event.data?.name ? `from ${event.data.name}` : '';
+        setLiveToast(`🔔 New project request received ${sender}!`);
+        setTimeout(() => setLiveToast(null), 6000);
+      }
+    });
+
+    // 5-second background poll when tab is visible
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        loadRequests(false);
+      }
+    }, 5000);
+
+    return () => {
+      unsubscribe();
+      clearInterval(interval);
+    };
   }, [loadRequests]);
 
   // Modal keyboard and focus management
@@ -224,6 +252,44 @@ export const AdminProjectRequestsPage: React.FC = () => {
       breadcrumbs={[{ label: 'Admin', href: '/admin' }, { label: 'Project Requests' }]}
     >
       <div className="space-y-6">
+        {/* Real-time Toast Notification */}
+        {liveToast && (
+          <div 
+            role="status"
+            className="p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-medium flex items-center justify-between gap-3 shadow-sm animate-in fade-in slide-in-from-top-2 duration-300"
+          >
+            <div className="flex items-center gap-2.5">
+              <Bell className="w-4 h-4 text-emerald-500 shrink-0 animate-bounce" aria-hidden="true" />
+              <span>{liveToast}</span>
+            </div>
+            <button 
+              onClick={() => setLiveToast(null)} 
+              className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline px-2 py-1 rounded"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {/* Live Status Sub-header */}
+        <div className="flex items-center justify-between gap-3 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold tracking-wide">
+              Live Sync Active
+            </span>
+            <span className="text-[var(--text-muted)] text-[11px] hidden sm:inline">
+              · Incoming project requests appear instantly
+            </span>
+          </div>
+          <span className="text-[var(--text-muted)] text-[11px]">
+            Total: {total} {total === 1 ? 'request' : 'requests'}
+          </span>
+        </div>
+
         {/* Controls Toolbar: Search, Status Filter & Refresh */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Search Input */}
@@ -279,7 +345,7 @@ export const AdminProjectRequestsPage: React.FC = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={loadRequests}
+              onClick={() => loadRequests(true)}
               disabled={loading}
               leftIcon={<RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} aria-hidden="true" />}
               className="min-h-[44px] shrink-0"
@@ -301,7 +367,7 @@ export const AdminProjectRequestsPage: React.FC = () => {
             <div className="p-8 text-center space-y-3" role="alert">
               <AlertCircle className="w-8 h-8 text-[var(--color-error)] mx-auto" aria-hidden="true" />
               <p className="text-xs font-mono text-[var(--text-secondary)]">{error}</p>
-              <Button variant="outline" size="sm" onClick={loadRequests} className="min-h-[44px]">
+              <Button variant="outline" size="sm" onClick={() => loadRequests(true)} className="min-h-[44px]">
                 Try Again
               </Button>
             </div>
