@@ -6,6 +6,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Link } from '../../lib/router';
+import { BrandLogo } from '../layout/BrandLogo';
 import { useTranslation } from '../../hooks/useTranslation';
 
 export interface MobileMenuProps {
@@ -92,19 +93,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         <div className="space-y-6">
           {/* Header Bar inside Drawer */}
           <div className="flex items-center justify-between pb-4 border-b border-[var(--border-color)]">
-            <Link
-              to="/"
-              onClick={onClose}
-              className="flex items-center gap-2 text-base font-bold tracking-tight text-[var(--text-primary)]"
-            >
-              <div
-                className="w-7 h-7 rounded-md bg-[var(--color-brand)] text-white flex items-center justify-center font-bold text-xs shrink-0"
-                aria-hidden="true"
-              >
-                BD
-              </div>
-              <span>BDCON Labs</span>
-            </Link>
+            <BrandLogo onClick={onClose} />
 
             <IconButton
               ref={closeButtonRef}
