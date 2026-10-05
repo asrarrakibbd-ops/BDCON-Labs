@@ -11,6 +11,7 @@ import { getWritingEntries, getWritingBySlug } from '../../data/writing';
 import { WritingEntry } from '../../types/writing';
 import { useRouter, matchPath, Link } from '../../lib/router';
 import { SEO } from '../../components/common/SEO';
+import { Breadcrumbs } from '../../components/navigation/Breadcrumbs';
 import { buildArticleSchema } from '../../lib/structuredData';
 import { trackEvent } from '../../lib/analytics';
 
@@ -95,6 +96,7 @@ export const WritingPage: React.FC = () => {
   return (
     <div className="w-full flex-1 flex flex-col">
       <RakibAsrarNav />
+      <Breadcrumbs currentTitle={selectedEntry?.title} />
 
       {/* If an entry is selected for long-form reading, display full editorial reader view */}
       {urlSlug ? (

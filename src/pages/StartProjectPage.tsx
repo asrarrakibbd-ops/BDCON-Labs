@@ -16,6 +16,7 @@ import { Link } from '../lib/router';
 import { submitProjectRequest } from '../data/projectRequests';
 import { trackEvent } from '../../src/lib/analytics';
 import { SEO } from '../components/common/SEO';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { useTranslation } from '../hooks/useTranslation';
 
 interface FormData {
@@ -249,6 +250,9 @@ export const StartProjectPage: React.FC = () => {
           { name: isBangla ? 'নতুন প্রজেক্ট শুরু করুন' : 'Start a Project', url: '/start-project' },
         ]}
       />
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* 1. Page Header */}
       <PageHeader
         eyebrow={isBangla ? 'প্রজেক্টের সূচনা' : 'PROJECT INITIATION'}

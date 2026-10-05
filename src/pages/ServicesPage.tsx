@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { ArrowRight, Wrench, AlertCircle, RefreshCw } from 'lucide-react';
 import { PageHeader } from '../components/layout/PageHeader';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { Container } from '../components/layout/Container';
 import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
@@ -54,6 +55,9 @@ export const ServicesPage: React.FC = () => {
           { name: isBangla ? 'সার্ভিসসমূহ' : 'Services', url: '/services' },
         ]}
       />
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* 1. Services Page Header */}
       <PageHeader
         eyebrow={isBangla ? 'আমাদের সার্ভিসেস' : 'WHAT WE BUILD'}

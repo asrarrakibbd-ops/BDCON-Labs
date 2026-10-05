@@ -22,6 +22,7 @@ import {
 } from '../data/engineeringServices';
 import { EngineeringService } from '../types/engineering';
 import { EngineeringServiceIcon } from '../components/engineering/EngineeringServiceIcon';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 
 export const EngineeringServiceDetailPage: React.FC = () => {
   const { path } = useRouter();
@@ -144,26 +145,7 @@ export const EngineeringServiceDetailPage: React.FC = () => {
         <Container size="2xl" className="relative z-10">
           
           {/* Breadcrumb Bar */}
-          <nav 
-            className="flex flex-wrap items-center gap-2 text-xs font-mono text-[var(--text-muted)] mb-6 select-none"
-            aria-label="Breadcrumb Navigation"
-          >
-            <Link to="/" className="hover:text-[var(--text-primary)] transition-colors">
-              {isBangla ? 'হোম' : 'Home'}
-            </Link>
-            <span>/</span>
-            <Link to="/engineering" className="hover:text-[var(--text-primary)] transition-colors">
-              {isBangla ? 'ইঞ্জিনিয়ারিং' : 'Engineering'}
-            </Link>
-            <span>/</span>
-            <Link to="/engineering/services" className="hover:text-[var(--text-primary)] transition-colors">
-              {isBangla ? 'সেবাসমূহ' : 'Services'}
-            </Link>
-            <span>/</span>
-            <span className="text-sky-600 dark:text-sky-400 font-semibold truncate max-w-[200px] sm:max-w-none">
-              {title}
-            </span>
-          </nav>
+          <Breadcrumbs variant="inline" currentTitle={title} className="mb-6" />
 
           {/* Hero Header Content */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

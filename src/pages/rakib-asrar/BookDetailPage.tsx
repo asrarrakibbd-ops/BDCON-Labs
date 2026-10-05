@@ -9,6 +9,7 @@ import { BrandBridge } from '../../components/rakib-asrar/BrandBridge';
 import { Link, useRouter, matchPath } from '../../lib/router';
 import { getBookBySlug, getBooks } from '../../data/books';
 import { Book } from '../../types/book';
+import { Breadcrumbs } from '../../components/navigation/Breadcrumbs';
 import { SEO } from '../../components/common/SEO';
 import { buildBookSchema } from '../../lib/structuredData';
 import { trackEvent } from '../../lib/analytics';
@@ -122,37 +123,7 @@ export const BookDetailPage: React.FC = () => {
       <RakibAsrarNav />
 
       {/* Breadcrumb Navigation */}
-      <div className="w-full bg-[var(--bg-canvas)] border-b border-[var(--border-color)] py-3">
-        <Container size="2xl">
-          <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4 text-xs font-bangla-sans">
-            <ol className="flex items-center gap-1.5 sm:gap-2 text-[var(--text-muted)] truncate">
-              <li>
-                <Link to="/rakib-asrar" className="hover:text-[var(--text-primary)] transition-colors">
-                  রাকিব আসরার
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li>
-                <Link to="/rakib-asrar/books" className="hover:text-[var(--text-primary)] transition-colors">
-                  বইসমূহ
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li className="font-semibold text-[var(--text-primary)] truncate" aria-current="page">
-                {book.title}
-              </li>
-            </ol>
-
-            <Link
-              to="/rakib-asrar/books"
-              className="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--color-brand)] transition-colors shrink-0 font-medium"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>গ্রন্থতালিকা</span>
-            </Link>
-          </nav>
-        </Container>
-      </div>
+      <Breadcrumbs currentTitle={book.title} />
 
       {/* Book Main Profile */}
       <header className="w-full py-10 sm:py-14 bg-[var(--bg-surface-subtle)] border-b border-[var(--border-color)]">

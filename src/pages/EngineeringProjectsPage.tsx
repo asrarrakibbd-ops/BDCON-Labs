@@ -18,6 +18,7 @@ import { useTranslation } from '../hooks/useTranslation';
 import { getEngineeringProjects } from '../data/engineeringProjects';
 import { EngineeringProject } from '../types/engineeringProject';
 import { EngineeringProjectCard } from '../components/engineering/EngineeringProjectCard';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 
 export const EngineeringProjectsPage: React.FC = () => {
   const { isBangla } = useTranslation();
@@ -89,6 +90,9 @@ export const EngineeringProjectsPage: React.FC = () => {
           { name: isBangla ? 'প্রজেক্টস' : 'Projects', url: '/engineering/projects' },
         ]}
       />
+
+      {/* Top Breadcrumbs Bar */}
+      <Breadcrumbs />
 
       {/* Hero Section */}
       <Section 

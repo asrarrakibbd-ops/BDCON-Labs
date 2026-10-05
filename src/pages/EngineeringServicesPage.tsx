@@ -8,6 +8,7 @@ import { SEO } from '../components/common/SEO';
 import { useTranslation } from '../hooks/useTranslation';
 import { ENGINEERING_SERVICES } from '../data/engineeringServices';
 import { EngineeringServiceIcon } from '../components/engineering/EngineeringServiceIcon';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 
 export const EngineeringServicesPage: React.FC = () => {
   const { isBangla } = useTranslation();
@@ -32,6 +33,9 @@ export const EngineeringServicesPage: React.FC = () => {
           { name: isBangla ? 'সেবাসমূহ' : 'Services', url: '/engineering/services' },
         ]}
       />
+
+      {/* Top Breadcrumbs Bar */}
+      <Breadcrumbs />
 
       {/* Services Header Section */}
       <Section 
@@ -87,15 +91,6 @@ export const EngineeringServicesPage: React.FC = () => {
                 : 'From building design and technical drawings to estimation and construction consultancy, BDCON Engineering provides practical civil engineering solutions tailored to each project.'
               }
             </p>
-
-            {/* Breadcrumb / Nav Quick Link */}
-            <div className="pt-2 flex items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
-              <Link to="/engineering" className="hover:text-[var(--text-primary)] transition-colors">
-                BDCON Engineering
-              </Link>
-              <span>/</span>
-              <span className="text-[var(--text-primary)] font-medium">Services</span>
-            </div>
 
           </div>
         </Container>

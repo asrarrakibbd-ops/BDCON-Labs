@@ -8,6 +8,7 @@ import { OtherServices } from '../components/services/OtherServices';
 import { Link, useRouter, matchPath } from '../lib/router';
 import { getServiceBySlug } from '../data/services';
 import { Service } from '../types/service';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
 import { buildServiceSchema } from '../lib/structuredData';
 import { trackEvent } from '../lib/analytics';
@@ -103,37 +104,7 @@ export const ServiceDetailPage: React.FC = () => {
         ]}
       />
       {/* 1. Breadcrumbs Bar */}
-      <div className="w-full bg-[var(--bg-canvas)] border-b border-[var(--border-color)] py-3">
-        <Container size="2xl">
-          <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4 text-xs">
-            <ol className="flex items-center gap-1.5 sm:gap-2 text-[var(--text-muted)] truncate">
-              <li>
-                <Link to="/" className="hover:text-[var(--text-primary)] transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li>
-                <Link to="/services" className="hover:text-[var(--text-primary)] transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li className="font-semibold text-[var(--text-primary)] truncate" aria-current="page">
-                {service.name}
-              </li>
-            </ol>
-
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--color-brand)] transition-colors shrink-0 font-medium"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-              <span className="hidden sm:inline">All Services</span>
-            </Link>
-          </nav>
-        </Container>
-      </div>
+      <Breadcrumbs currentTitle={service.name} />
 
       {/* 2. Service Hero */}
       <header className="w-full py-10 sm:py-14 bg-[var(--bg-surface-subtle)] border-b border-[var(--border-color)]">

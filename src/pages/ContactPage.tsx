@@ -5,6 +5,7 @@ import { Section } from '../components/ui/Section';
 import { ContactForm } from '../components/contact/ContactForm';
 import { ContactInfoSection } from '../components/contact/ContactInfoSection';
 import { SEO } from '../components/common/SEO';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { useTranslation } from '../hooks/useTranslation';
 
 export const ContactPage: React.FC = () => {
@@ -25,6 +26,9 @@ export const ContactPage: React.FC = () => {
           { name: isBangla ? 'যোগাযোগ' : 'Contact', url: '/contact' },
         ]}
       />
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* 1. Page Header */}
       <PageHeader
         eyebrow={isBangla ? 'যোগাযোগ' : 'CONTACT'}

@@ -10,6 +10,7 @@ import { EmptyState } from '../../components/ui/EmptyState';
 import { getBooks } from '../../data/books';
 import { Book } from '../../types/book';
 import { SEO } from '../../components/common/SEO';
+import { Breadcrumbs } from '../../components/navigation/Breadcrumbs';
 
 export const BooksPage: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -47,6 +48,7 @@ export const BooksPage: React.FC = () => {
         ]}
       />
       <RakibAsrarNav />
+      <Breadcrumbs />
 
       {/* Header */}
       <Section spacing="lg" surface="canvas" borderBottom>

@@ -19,6 +19,7 @@ import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
 import { Link, useRouter } from '../lib/router';
 import { SEO } from '../components/common/SEO';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { useTranslation } from '../hooks/useTranslation';
 import { submitEngineeringInquiry, EngineeringInquiryInput } from '../lib/supabase/services/engineeringInquiries';
 
@@ -163,6 +164,9 @@ export const EngineeringContactPage: React.FC = () => {
         ]}
       />
 
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* Header Section */}
       <Section 
         spacing="lg" 
@@ -171,21 +175,6 @@ export const EngineeringContactPage: React.FC = () => {
         <Container size="2xl">
           <div className="max-w-3xl space-y-4">
             
-            {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 text-xs font-mono text-[var(--text-muted)] select-none">
-              <Link to="/" className="hover:text-[var(--text-primary)] transition-colors">
-                {isBangla ? 'হোম' : 'Home'}
-              </Link>
-              <span>/</span>
-              <Link to="/engineering" className="hover:text-[var(--text-primary)] transition-colors">
-                {isBangla ? 'ইঞ্জিনিয়ারিং' : 'Engineering'}
-              </Link>
-              <span>/</span>
-              <span className="text-sky-600 dark:text-sky-400 font-medium">
-                {isBangla ? 'প্রজেক্ট আলোচনা' : 'Discuss Project'}
-              </span>
-            </nav>
-
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-sm bg-sky-600 dark:bg-sky-400 rotate-45 inline-block shrink-0" />
               <span className={`text-xs uppercase tracking-widest text-[var(--color-brand)] font-semibold ${isBangla ? 'font-bangla-sans' : 'font-mono'}`}>

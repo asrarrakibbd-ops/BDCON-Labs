@@ -8,6 +8,7 @@ import { BrandBridge } from '../../components/rakib-asrar/BrandBridge';
 import { getAuthorProfile, AuthorProfile, AUTHOR_PROFILE } from '../../data/author';
 import { Link } from '../../lib/router';
 import { SEO } from '../../components/common/SEO';
+import { Breadcrumbs } from '../../components/navigation/Breadcrumbs';
 import { buildPersonSchema } from '../../lib/structuredData';
 
 export const RakibAsrarAboutPage: React.FC = () => {
@@ -49,6 +50,7 @@ export const RakibAsrarAboutPage: React.FC = () => {
         ]}
       />
       <RakibAsrarNav />
+      <Breadcrumbs />
 
       {/* Hero Header */}
       <Section spacing="lg" surface="canvas" borderBottom>

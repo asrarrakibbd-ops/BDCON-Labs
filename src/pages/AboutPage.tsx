@@ -8,6 +8,7 @@ import { TeamArchitecture } from '../components/about/TeamArchitecture';
 import { RakibAsrarBridge } from '../components/about/RakibAsrarBridge';
 import { AboutCTA } from '../components/about/AboutCTA';
 import { SEO } from '../components/common/SEO';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { buildOrganizationSchema } from '../lib/structuredData';
 
 export const AboutPage: React.FC = () => {
@@ -23,6 +24,9 @@ export const AboutPage: React.FC = () => {
           { name: 'About', url: '/about' },
         ]}
       />
+      {/* Top Breadcrumbs Bar */}
+      <Breadcrumbs />
+
       {/* 1. About Hero */}
       <AboutHero />
 

@@ -5,6 +5,7 @@ import { EngineeringServicesPreview } from '../components/engineering/Engineerin
 import { EngineeringProjectsPreview } from '../components/engineering/EngineeringProjectsPreview';
 import { EngineeringBrandIntro } from '../components/engineering/EngineeringBrandIntro';
 import { EngineeringCTA } from '../components/engineering/EngineeringCTA';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { useTranslation } from '../hooks/useTranslation';
 
 export const EngineeringPage: React.FC = () => {
@@ -29,6 +30,9 @@ export const EngineeringPage: React.FC = () => {
           { name: isBangla ? 'ইঞ্জিনিয়ারিং' : 'Engineering', url: '/engineering' },
         ]}
       />
+
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
 
       {/* 1. Hero Section */}
       <EngineeringHero />

@@ -15,6 +15,7 @@ import { Book } from '../../types/book';
 import { WritingEntry } from '../../types/writing';
 import { Link } from '../../lib/router';
 import { SEO } from '../../components/common/SEO';
+import { Breadcrumbs } from '../../components/navigation/Breadcrumbs';
 import { buildPersonSchema } from '../../lib/structuredData';
 
 export const RakibAsrarPage: React.FC = () => {
@@ -76,6 +77,7 @@ export const RakibAsrarPage: React.FC = () => {
       />
       {/* 1. Brand Sub-Navigation & Switcher */}
       <RakibAsrarNav />
+      <Breadcrumbs />
 
       {/* 2. Hero Section with Genuine Portrait */}
       <RakibAsrarHero profile={authorProfile} />

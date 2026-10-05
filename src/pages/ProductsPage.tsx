@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Search, X, Filter, AlertCircle, RefreshCw } from 'lucide-react';
 import { PageHeader } from '../components/layout/PageHeader';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { Container } from '../components/layout/Container';
 import { Section } from '../components/ui/Section';
 import { ProductCard } from '../components/products/ProductCard';
@@ -111,6 +112,9 @@ export const ProductsPage: React.FC = () => {
           { name: isBangla ? 'প্রোডাক্টস' : 'Products', url: '/products' },
         ]}
       />
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* 1. Page Header */}
       <PageHeader
         eyebrow={isBangla ? 'আমাদের প্রোডাক্টস' : 'PRODUCT CATALOGUE'}

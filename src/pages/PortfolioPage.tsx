@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { ArrowRight, Briefcase, AlertCircle, RefreshCw } from 'lucide-react';
 import { PageHeader } from '../components/layout/PageHeader';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { Container } from '../components/layout/Container';
 import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
@@ -82,6 +83,9 @@ export const PortfolioPage: React.FC = () => {
           { name: isBangla ? 'পোর্টফোলিও' : 'Portfolio', url: '/portfolio' },
         ]}
       />
+      {/* Top Breadcrumb Bar */}
+      <Breadcrumbs />
+
       {/* 1. Page Header */}
       <PageHeader
         eyebrow={isBangla ? 'আমাদের কাজ ও প্রজেক্ট' : 'OUR WORK'}

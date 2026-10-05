@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeft, Compass, AlertCircle } from 'lucide-react';
-import { ProductBreadcrumbs } from '../components/products/ProductBreadcrumbs';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { ProductHero } from '../components/products/ProductHero';
 import { ProductProblemSolution } from '../components/products/ProductProblemSolution';
 import { ProductFeatures } from '../components/products/ProductFeatures';
@@ -116,11 +116,7 @@ export const ProductDetailPage: React.FC = () => {
         ]}
       />
       {/* Top Breadcrumb Bar */}
-      <div className="w-full bg-[var(--bg-canvas)] border-b border-[var(--border-color)] py-3">
-        <Container size="2xl">
-          <ProductBreadcrumbs productName={product.name} />
-        </Container>
-      </div>
+      <Breadcrumbs currentTitle={product.name} />
 
       {/* 1. Product Hero */}
       <ProductHero product={product} />

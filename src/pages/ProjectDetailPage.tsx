@@ -22,6 +22,7 @@ import { PortfolioCTA } from '../components/portfolio/PortfolioCTA';
 import { Link, useRouter, matchPath } from '../lib/router';
 import { getPortfolioProjectBySlug, getPortfolioProjects } from '../data/portfolio';
 import { PortfolioProject } from '../types/portfolio';
+import { Breadcrumbs } from '../components/navigation/Breadcrumbs';
 import { SEO } from '../components/common/SEO';
 import { buildCaseStudySchema } from '../lib/structuredData';
 import { trackEvent } from '../lib/analytics';
@@ -132,37 +133,7 @@ export const ProjectDetailPage: React.FC = () => {
         ]}
       />
       {/* 1. Breadcrumbs Bar */}
-      <div className="w-full bg-[var(--bg-canvas)] border-b border-[var(--border-color)] py-3">
-        <Container size="2xl">
-          <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4 text-xs">
-            <ol className="flex items-center gap-1.5 sm:gap-2 text-[var(--text-muted)] truncate">
-              <li>
-                <Link to="/" className="hover:text-[var(--text-primary)] transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li>
-                <Link to="/portfolio" className="hover:text-[var(--text-primary)] transition-colors">
-                  Portfolio
-                </Link>
-              </li>
-              <li aria-hidden="true" className="shrink-0 text-[var(--border-strong)]">/</li>
-              <li className="font-semibold text-[var(--text-primary)] truncate" aria-current="page">
-                {project.title}
-              </li>
-            </ol>
-
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--color-brand)] transition-colors shrink-0 font-medium"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-              <span className="hidden sm:inline">All Work</span>
-            </Link>
-          </nav>
-        </Container>
-      </div>
+      <Breadcrumbs currentTitle={project.title} />
 
       {/* 2. Project Hero */}
       <header className="w-full py-10 sm:py-14 bg-[var(--bg-surface-subtle)] border-b border-[var(--border-color)]">
